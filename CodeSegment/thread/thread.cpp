@@ -3,9 +3,18 @@
 
 #include "pch.h"
 #include <iostream>
+#include<thread>
 
+void func()
+{
+    std::cout << "thread id:" << std::this_thread::get_id() << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+}
 int main()
 {
+    std::cout << "main thread id:" << std::this_thread::get_id() << std::endl;
+    std::thread t1(func);
+    t1.join();
     std::cout << "Hello World!\n"; 
 }
 
