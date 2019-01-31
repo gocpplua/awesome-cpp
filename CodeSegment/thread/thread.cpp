@@ -4,7 +4,6 @@
 #include "pch.h"
 #include <iostream>
 #include<thread>
-#include <windows.h>
 
 void func()
 {
@@ -22,7 +21,7 @@ void funcArgs(int a)
     std::cout << "end " << __FUNCTION__ << ":thread id = " << std::this_thread::get_id() << ", a = " << a << std::endl;
 
 }
-int main()
+int mainThread()
 {
     std::cout << "main thread id:" << std::this_thread::get_id() << std::endl;
     std::thread t1(func);
@@ -35,6 +34,7 @@ int main()
     std::cout << "t2.join" << std::endl;
     t2.join();
     std::cout << "Hello World!\n"; 
+    return 0;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
