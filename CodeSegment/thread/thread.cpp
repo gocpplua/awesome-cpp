@@ -4,17 +4,36 @@
 #include "pch.h"
 #include <iostream>
 #include<thread>
+#include <windows.h>
 
 void func()
 {
-    std::cout << "thread id:" << std::this_thread::get_id() << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::cout << "start " << __FUNCTION__ << ":thread id = " << std::this_thread::get_id()  << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(2));
+    std::cout << "end " << __FUNCTION__ << ":thread id = " << std::this_thread::get_id() << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+}
+
+void funcArgs(int a)
+{
+    std::cout << "start " << __FUNCTION__ << ":thread id = " << std::this_thread::get_id() << ", a = " << a << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    std::cout << "end " << __FUNCTION__ << ":thread id = " << std::this_thread::get_id() << ", a = " << a << std::endl;
+
 }
 int main()
 {
     std::cout << "main thread id:" << std::this_thread::get_id() << std::endl;
     std::thread t1(func);
-    t1.join();
+    std::thread t2(funcArgs, 1);
+    //t1.detach();//加上这句代码后，就不能在使用t1.join
+
+    //xx.join 表示一定要等到这个线程结束了，才会执行到下一个代码行
+    std::cout << "t1.join" << std::endl;
+    t1.join(); //去掉这句代码会导致崩溃，可以尝试定位下这个崩溃
+    std::cout << "t2.join" << std::endl;
+    t2.join();
     std::cout << "Hello World!\n"; 
 }
 
