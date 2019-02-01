@@ -19,7 +19,7 @@ void mutexfunc2()
     std::cout << __FUNCTION__ << " " << __LINE__ << " " << "thread id:" << std::this_thread::get_id() << std::endl;
 }
 
-int main()
+int mainmutex()
 {
     std::vector<std::thread> g_list;
     std::thread t1(mutexfunc1); g_list.push_back(std::move(t1));
