@@ -11,7 +11,7 @@ void onceFlagFunc()
     std::call_once(onceFlag, []() {std::cout << "onceFlagFunc" << std::endl; });
 }
 
-int main()
+int mainOnceFlag()
 {
     std::thread t1(onceFlagFunc);
     std::thread t2(onceFlagFunc);
