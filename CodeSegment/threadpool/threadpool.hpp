@@ -51,10 +51,6 @@ private:
         int i = 0;
         while (m_running)
         {
-            {
-                std::lock_guard<std::recursive_mutex> locker(g_coutmutex);
-                std::cout << "[start]RunInThread线程ID:" << std::this_thread::get_id() << std::endl;
-            }
             std::list<Task> list;
             m_queue.Take(list);
             for (auto& task : list)

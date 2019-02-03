@@ -81,7 +81,7 @@ private:
         if (full)
         {
             std::lock_guard<std::recursive_mutex> locker(g_coutmutex);
-            std::cout << "缓冲区满了,需要等待..." << std::endl;
+            std::cout << "缓冲区满了,需要等待...线程ID:" << std::this_thread::get_id() << std::endl;
         }
         return !full;
     }
@@ -91,7 +91,7 @@ private:
         if (empty)
         {
             std::lock_guard<std::recursive_mutex> locker(g_coutmutex);
-            std::cout << "缓冲区空了,需要等待..." << std::endl;
+            std::cout << "缓冲区空了,需要等待...线程ID:" << std::this_thread::get_id() << std::endl;
         }
         return !empty;
     }
