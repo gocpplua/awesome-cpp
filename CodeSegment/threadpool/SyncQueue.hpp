@@ -99,7 +99,7 @@ private:
     void Add(F&& x)
     {
         std::unique_lock<std::mutex> locker(m_mutex);
-        m_notEmpty.wait(locker, [this] {return m_needStop || NotFull(); }); //lambda表达式省略了参数
+        m_notFull.wait(locker, [this] {return m_needStop || NotFull(); }); //lambda表达式省略了参数
         if (m_needStop)
         {
             return;
