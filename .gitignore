@@ -1,0 +1,14 @@
+*.ipch
+*.tlog
+CodeSegment/thread/Debug/
+CodeSegment/thread/x64/
+CodeSegment/threadpool/Release/
+CodeSegment/threadpool/x64/
+CodeSegment/tupe/Debug/
+CodeSegment/x64/Debug/
+CodeSegment/x64/Release/
+CodeSegment/CodeSegment/Debug/
+CodeSegment/CodeSegment/x64/Debug/
+CodeSegment/Debug/
+CodeSegment/function/Debug/
+CodeSegment/threadpool/Debug/
