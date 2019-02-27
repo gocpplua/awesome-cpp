@@ -3,11 +3,27 @@
 
 #include "pch.h"
 #include <iostream>
+#include <string>
 #include "../pb3/student.pb.h"
 int main()
 {
-    
-    std::cout << "Hello World!\n"; 
+    tutorial::Student st;
+    st.set_id(28);
+    st.set_name("chenqi");
+    const std::string str = st.SerializeAsString(); // 将消息序列化并储存在指定的string中。注意里面的内容是二进制的，而不是文本；我们只是使用string作为一个很方便的容器。
+    std::cout << str << std::endl;
+
+    tutorial::Student deserializedStudent;
+    bool bParseOK = deserializedStudent.ParseFromString(str);
+    if (!bParseOK)
+    {
+        std::cout << "ParseFromString failed!" << std::endl;
+        return 0;
+    }
+
+    std::cout << "deserializedStudent debugString:" << deserializedStudent.DebugString();
+    std::cout << "Student ID: " << deserializedStudent.id() << std::endl;
+    std::cout << "Name: " << deserializedStudent.name() << std::endl;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
