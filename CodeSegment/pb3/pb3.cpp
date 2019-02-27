@@ -3,7 +3,7 @@
 
 #include "pch.h"
 #include <iostream>
-//#include "../pb3/student.pb.h"
+#include "../pb3/student.pb.h"
 int main()
 {
     
