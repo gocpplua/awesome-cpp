@@ -13,3 +13,6 @@ CodeSegment/Debug/
 CodeSegment/function/Debug/
 CodeSegment/threadpool/Debug/
 CodeSegment/Release/
+CodeSegment/pb3/cmakepb3.6.1/
+CodeSegment/pb3/protobuf-all-3.6.1/
+CodeSegment/shareptr/Debug/
