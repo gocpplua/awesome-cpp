@@ -42,6 +42,17 @@ int main()
     std::shared_ptr<MyClass> class1 = GetUser(1);
     std::shared_ptr<MyClass> class2 = GetUser(2);
     std::unordered_map<int, std::shared_ptr<MyClass>> rooms1 = rooms_; // map是进行深拷贝的
+
+    for (int i = 0; i < 1000000000; i++)
+    {
+        {
+            std::this_thread::sleep_for(std::chrono::microseconds(1000));
+            std::unique_ptr<char[]> data(new char[4096*1024]); // 这里不会内存泄漏，unique_ptr 除了独占性这个特点，还可以指向一个数组
+            int j = 0;
+        }
+        int k = 0;
+    }
+
     std::cout << "Hello World!\n";
 }
 
