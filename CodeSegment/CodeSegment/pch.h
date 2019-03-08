@@ -8,7 +8,18 @@
 
 #ifndef PCH_H
 #define PCH_H
-
+class Test
+{
+public:
+    static int getA() {
+        return max_group_operate_time_;
+    }
+    static void setA(const int &val) {
+        max_group_operate_time_ = val;
+    }
+private:
+    static int max_group_operate_time_;
+};
 // TODO: 添加要在此处预编译的标头
 
 #endif //PCH_H

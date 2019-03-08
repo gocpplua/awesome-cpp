@@ -4,9 +4,38 @@
 #include "pch.h"
 #include <iostream>
 
+class A {
+    virtual int test() { return 1; };
+};
+class B : public A {
+    virtual int test() { throw "aaaa"; };
+};
+
 int main()
 {
-    std::cout << "Hello World!\n"; 
+    Test::setA(1);
+    Test::setA(2);
+    std::cout << "a = " << Test::getA() << std::endl;
+    std::cout << "Hello World!\n";
+
+    int tmp_windeposit = 1020;
+    int fee = tmp_windeposit * 10 / 100 ;
+
+    if (tmp_windeposit <= 100) {			// 100两以下不收
+        fee *= 0;
+    }
+    else if (tmp_windeposit <= 10000) {	// 1万两以下
+    }
+    else if (tmp_windeposit <= 100000) {	// 10万两以下
+        fee *= (int)ceil((double)tmp_windeposit / 20000);
+    }
+    else {							// 10万两以上
+        fee *= 5;
+    }
+    std::cout << "fee = " << fee << std::endl;
+
+    B b1;
+
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
