@@ -11,3 +11,8 @@ https://blog.csdn.net/piggyxp/article/category/302220
 
 
 [《网络编程懒人入门(一)：快速理解网络通信协议（上篇）》](http://www.52im.net/thread-1095-1-1.html)
+
+[《windows socket 网络编程系列》](https://blog.csdn.net/ithzhang/column/info/windowssocketbyiter)
+[《网络编程》](https://blog.csdn.net/zt_xcyk/article/category/6779549)
+[《自制 windows网络编程》](https://www.bilibili.com/video/av3906340/)
+[《Beej's Guide to Network Programming 简体中文版》](http://beej-zhcn.netdpi.net/news)
