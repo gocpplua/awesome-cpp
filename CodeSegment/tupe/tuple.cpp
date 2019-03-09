@@ -5,6 +5,7 @@
 #include <iostream>
 #include<string>
 #include<tuple>
+#include<memory>
 
 // 打印任何大小 tuple 的帮助函数:https://zh.cppreference.com/w/cpp/utility/tuple/tuple_cat
 template<class Tuple, std::size_t N>
@@ -33,6 +34,26 @@ void print(const std::tuple<Args...>& t)
 }
 // 结束帮助函数
 
+struct A;
+struct B;
+struct A
+{
+    std::shared_ptr<B> bptr;
+    ~A()
+    {
+        std::cout << "A is delete!" << std::endl;
+    }
+};
+
+struct B
+{
+    std::weak_ptr<A> aptr; // 这里使用shared_ptr会导致循环引用，从而出现内存泄漏
+    ~B()
+    {
+        std::cout << "B is delete!" << std::endl;
+    }
+};
+
 int main()
 {
     int x = 1;
@@ -53,6 +74,17 @@ int main()
     std::tuple<int, int> tp1(11, 22);
     auto tp2 = std::tuple_cat(tp1, std::make_tuple("tuple"));
     print(tp2);
+
+    {
+        std::shared_ptr<A> ap(new A); // 构造一个A 和 智能指针ap，ap的引用计数1
+        std::shared_ptr<B> bp(new B); // 构造一个B 和 智能指针bp，bp的引用计数1
+        ap->bptr = bp; // 由于bptr是share_ptr,所以bp 的引用计数+1，那么bp的引用计数就是2
+        bp->aptr = ap; // 由于aptr是weak_ptr,所以ap 的引用计数不加1，那么ap的引用计数还是1
+    }
+    // 此时ap 和 bp 的引用计数分别减去1，ap引用计数就是0，bp引用计数就是1,
+    // 接着A对象析构，那么ap->bptr 就不存在了，那么 bp的引用就是再减去1，变为0,
+    // 接着B对象析构
+
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
