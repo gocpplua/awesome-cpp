@@ -1,9 +1,11 @@
-﻿// winnet_server.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// winnetClient.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
 #include "pch.h"
 #include <iostream>
+#include <string>
 #include <WinSock2.h>
+#include <WS2tcpip.h>  
 #pragma comment(lib,"ws2_32.lib") 
 int main()
 {
@@ -26,9 +28,22 @@ int main()
 
     // 3、绑定
     SOCKADDR_IN addrSrv;
-    addrSrv.sin_addr.S_un.S_addr = inet_addr("127.0.0.1");
-    addrSrv.sin_family = AF_INET;
+    inet_pton(AF_INET, "127.0.0.1", &addrSrv); //在头文件:WS2tcpip.h,相当于addrSrv.sin_addr.S_un.S_addr = inet_addr("127.0.0.1"); addrSrv.sin_family = AF_INET;
     addrSrv.sin_port = htons(8080);
+
+    std::string strSend;
+    std::string strRecv;
+    while (true)
+    {
+        std::cin >> strSend;
+        int nSend = sendto(socClient, strSend.c_str(), strlen(strSend.c_str())+1, 0, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
+
+        int nRecv = recv(socClient, (char*)strRecv.c_str(), strlen(strRecv.c_str()) + 1, 0);
+        std::cout << strRecv << std::endl;
+    }
+    closesocket(socClient);
+    WSACleanup();
+
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
