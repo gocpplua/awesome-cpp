@@ -1,5 +1,5 @@
 ﻿// winnetServer.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
+// udp 服务端
 
 #include "pch.h"
 #include <iostream>
@@ -7,7 +7,7 @@
 #include <WinSock2.h>
 #include <WS2tcpip.h>  
 #pragma comment(lib,"ws2_32.lib") 
-int main()
+int mainUDP()
 {
     // 1、 初始化套接字:添加头文件（#include <WinSock2.h>） 和 lib库（#pragma comment(lib,"ws2_32.lib")
     WSAData wsaData;
