@@ -27,23 +27,30 @@ int main()
         return 0;
     }
     SOCKADDR_IN addrSrv;//服务器的地址数据结构
-    //addrSrv.sin_family = AF_INET;
+    addrSrv.sin_family = AF_INET;
     addrSrv.sin_port = htons(8181);//端口号为8181
-    //addrSrv.sin_addr.S_un.S_addr = inet_addr("127.0.0.1"); //127.0.0.1为本电脑IP地址
-    inet_pton(AF_INET, "127.0.0.1", &(addrSrv.sin_addr));
+    inet_pton(AF_INET, "127.0.0.1", &(addrSrv.sin_addr)); // 等价于:addrSrv.sin_addr.S_un.S_addr = inet_addr("127.0.0.1"); //127.0.0.1为本电脑IP地址
+
     std::string strSend;
-    std::string strRecv;
     int nRecvfromLen = sizeof(SOCKADDR);
     while (true)
     {
         std::cin >> strSend;
         int nSend = sendto(socClient, strSend.c_str(), strlen(strSend.c_str())+1, 0, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR)); // UDP 没有connet，就会在发送的时候将自己的地址给服务端
-        if (0 != nSend)
+        if (-1 == nSend)
         {
             std::cout << WSAGetLastError() << std::endl;
         }
-        int nRecv = recvfrom(socClient, (char*)strRecv.c_str(), strlen(strRecv.c_str()) + 1, 0, (SOCKADDR*)&addrSrv,&nRecvfromLen);
-        std::cout << strRecv << std::endl;
+        char szRecv[100] = { 0 };
+        int nRecv = recvfrom(socClient, szRecv, 100, 0, (SOCKADDR*)&addrSrv,&nRecvfromLen);
+        if (-1 == nRecv)
+        {
+            std::cout << WSAGetLastError() << std::endl;
+        }
+        else
+        {
+            std::cout << "client recv:" << szRecv << std::endl;
+        }
     }
     closesocket(socClient);
     WSACleanup();

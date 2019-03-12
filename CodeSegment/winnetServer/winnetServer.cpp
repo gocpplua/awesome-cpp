@@ -30,8 +30,8 @@ int main()
     // 3、初始化自己的地址
     SOCKADDR_IN addrSrv;
     addrSrv.sin_family = AF_INET;
-    addrSrv.sin_port = htons(8181);
-    addrSrv.sin_addr.S_un.S_addr = INADDR_ANY;
+    addrSrv.sin_port = htons(8181);//从"主机字节顺序" 转变为 "网络字节顺序"
+    addrSrv.sin_addr.S_un.S_addr = htonl(INADDR_ANY);
 
     // 4、绑定socket
     int nBind = bind(socServer, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
@@ -41,12 +41,12 @@ int main()
     }
     //
     SOCKADDR_IN addClient;
-    std::string strRecv;
+    char szRecv[100] = { 0 };
     int fromlen = sizeof(SOCKADDR);
     while (true)
     {
-        recvfrom(socServer, (char*)strRecv.c_str(), strlen(strRecv.c_str())+1, 0, (SOCKADDR*)&addClient,&fromlen);
-        std::cout << strRecv << std::endl;
+        recvfrom(socServer, szRecv, 100, 0, (SOCKADDR*)&addClient,&fromlen);
+        std::cout << szRecv << std::endl;
         sendto(socServer, "OK", strlen("OK") + 1, 0, (SOCKADDR*)&addClient, sizeof(SOCKADDR));
     }
 
