@@ -10,19 +10,26 @@
 int main()
 {
     // 1、 初始化套接字:添加头文件（#include <WinSock2.h>） 和 lib库（#pragma comment(lib,"ws2_32.lib")
+    const int versionL = 1;
+    const int versionH = 1;
     WSAData wsaData;
-    int nErr = WSAStartup(MAKEWORD(1, 1), &wsaData);
+    int nErr = WSAStartup(MAKEWORD(versionL, versionH), &wsaData);
     if (0 != nErr)
     {
-        std::cout << " 初始化套接字失败:" << GetLastError() << std::endl;
+        std::cout << " 初始化套接字失败:" << WSAGetLastError() << std::endl;
         return 0;
     }
-
+    // WSAStartup 即使没有我需要的库1.1，但是也会加载系统上的库，所以需要校验版本
+    if (LOBYTE(wsaData.wVersion) != versionL || HIBYTE(wsaData.wVersion) != versionH)
+    {
+        std::cout << " 初始化套接字失败:" << "错误的网络库版本" << std::endl;
+        return 0;
+    }
     // 2、 创建socket
     SOCKET socClient = socket(AF_INET, SOCK_STREAM, 0); // 指明地址簇类型(IPV4:AF_INET), 指明socket的类型(数据报套接字TCP:SOCK_STREAM),指明数据传输协议/指明端到端协议
     if (INVALID_SOCKET == socClient)
     {
-        std::cout << " 初始化socket失败:" << GetLastError() << std::endl;
+        std::cout << " 初始化socket失败:" << WSAGetLastError() << std::endl;
         WSACleanup();
         return 0;
     }
@@ -33,7 +40,7 @@ int main()
 
     if (0 != connect(socClient, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR))) // connect 返回0 表示连接成功
     {
-        std::cout << " connet失败:" << GetLastError() << std::endl;
+        std::cout << " connet失败:" << WSAGetLastError() << std::endl;
         WSACleanup();
         return 0;
     }
@@ -49,17 +56,6 @@ int main()
         {
             std::cout << WSAGetLastError() << std::endl;
         }
-        /*
-        char szRecv[100] = { 0 };
-        int nRecv = recvfrom(socClient, szRecv, 100, 0, (SOCKADDR*)&addrSrv, &nRecvfromLen);
-        if (-1 == nRecv)
-        {
-            std::cout << WSAGetLastError() << std::endl;
-        }
-        else
-        {
-            std::cout << "client recv:" << szRecv << std::endl;
-        }*/
     }
     closesocket(socClient);
     WSACleanup();

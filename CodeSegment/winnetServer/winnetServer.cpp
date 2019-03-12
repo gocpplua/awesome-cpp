@@ -10,11 +10,19 @@
 int mainUDP()
 {
     // 1、 初始化套接字:添加头文件（#include <WinSock2.h>） 和 lib库（#pragma comment(lib,"ws2_32.lib")
+    const int versionL = 1;
+    const int versionH = 1;
     WSAData wsaData;
-    int nErr = WSAStartup(MAKEWORD(1, 1), &wsaData);
+    int nErr = WSAStartup(MAKEWORD(versionL, versionH), &wsaData);
     if (0 != nErr)
     {
-        std::cout << " 初始化套接字失败:" << GetLastError() << std::endl;
+        std::cout << " 初始化套接字失败:" << WSAGetLastError() << std::endl;
+        return 0;
+    }
+    // WSAStartup 即使没有我需要的库1.1，但是也会加载系统上的库，所以需要校验版本
+    if (LOBYTE(wsaData.wVersion) != versionL || HIBYTE(wsaData.wVersion) != versionH)
+    {
+        std::cout << " 初始化套接字失败:" << "错误的网络库版本" << std::endl;
         return 0;
     }
 
@@ -22,7 +30,7 @@ int mainUDP()
     SOCKET socServer = socket(AF_INET, SOCK_DGRAM, 0); // 指明地址簇类型(IPV4:AF_INET), 指明socket的类型(数据报套接字UDP:SOCK_DGRAM),指明数据传输协议/指明端到端协议
     if (INVALID_SOCKET == socServer)
     {
-        std::cout << " 初始化socket失败:" << GetLastError() << std::endl;
+        std::cout << " 初始化socket失败:" << WSAGetLastError() << std::endl;
         WSACleanup();
         return 0;
     }
@@ -37,7 +45,7 @@ int mainUDP()
     int nBind = bind(socServer, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
     if (0 != nBind)
     {
-        std::cout << GetLastError() << std::endl;
+        std::cout << WSAGetLastError() << std::endl;
     }
     //
     SOCKADDR_IN addClient;

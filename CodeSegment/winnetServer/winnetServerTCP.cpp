@@ -9,12 +9,20 @@
 #pragma comment(lib,"ws2_32.lib") 
 int main()
 {
+    const int versionL = 1;
+    const int versionH = 1;
     // 1、 初始化套接字:添加头文件（#include <WinSock2.h>） 和 lib库（#pragma comment(lib,"ws2_32.lib")
     WSAData wsaData;
-    int nErr = WSAStartup(MAKEWORD(1, 1), &wsaData);
+    int nErr = WSAStartup(MAKEWORD(versionL, versionH), &wsaData);
     if (0 != nErr)
     {
-        std::cout << " 初始化套接字失败:" << GetLastError() << std::endl;
+        std::cout << " 初始化套接字失败:" << WSAGetLastError() << std::endl;
+        return 0;
+    }
+    // WSAStartup 即使没有我需要的库1.1，但是也会加载系统上的库，所以需要校验版本
+    if (LOBYTE(wsaData.wVersion) != versionL || HIBYTE(wsaData.wVersion) != versionH)
+    {
+        std::cout << " 初始化套接字失败:" << "错误的网络库版本" << std::endl;
         return 0;
     }
 
@@ -22,7 +30,7 @@ int main()
     SOCKET socServer = socket(AF_INET, SOCK_STREAM, 0); // 指明地址簇类型(IPV4:AF_INET), 指明socket的类型(数据报套接字TCP:SOCK_STREAM),指明数据传输协议/指明端到端协议
     if (INVALID_SOCKET == socServer)
     {
-        std::cout << " 初始化socket失败:" << GetLastError() << std::endl;
+        std::cout << " 初始化socket失败:" << WSAGetLastError() << std::endl;
         WSACleanup();
         return 0;
     }
@@ -37,13 +45,13 @@ int main()
     int nBind = bind(socServer, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
     if (0 != nBind)
     {
-        std::cout << GetLastError() << std::endl;
+        std::cout << WSAGetLastError() << std::endl;
         return 0;
     }
     //5、listen 监听
     if (listen(socServer, 1))
     {
-        std::cout << "listen failed:" << GetLastError() << std::endl;
+        std::cout << "listen failed:" << WSAGetLastError() << std::endl;
         return 0;
     }
     SOCKET socClientServer;
@@ -53,7 +61,7 @@ int main()
     //6、等待连接
     if ((socClientServer = accept(socServer, (SOCKADDR*)&addrClient, &len)) <= 0) // 使用 socClient 进行和客户端的通信
     {
-        std::cout << "accept failed:" << GetLastError() << std::endl;
+        std::cout << "accept failed:" << WSAGetLastError() << std::endl;
         return 0;
 
     }
@@ -61,7 +69,7 @@ int main()
     {
         if (recv(socClientServer, revData, 1024, 0) <= 0)
         {
-            std::cout << "recv failed:" << GetLastError() << std::endl;
+            std::cout << "recv failed:" << WSAGetLastError() << std::endl;
             closesocket(socClientServer);
             closesocket(socServer);
             return 0;
