@@ -3,7 +3,12 @@
 
 #include "pch.h"
 #include <iostream>
-
+#include <chrono>
+#include <vector>
+#include <map>
+#include <random>
+#include <array>
+#include <time.h>
 class A {
     virtual int test() { return 1; };
 };
@@ -11,31 +16,79 @@ class B : public A {
     virtual int test() { throw "aaaa"; };
 };
 
+void print()
+{
+
+}
+
+template<typename T, typename... Types>
+void print(const T& firstAry, const Types&... args)
+{
+    std::cout << firstAry << std::endl;
+    print(args...);
+}
+
+class a
+{
+public:
+private:
+	int m_d;
+	char m_a[1024 * 1024];
+	double m_c;
+	int m_b;
+};
+
 int main()
 {
+	for (int i = 0; i < 1000; i++)
+	{
+		{
+			std::unique_ptr<a> data(new a[10]);
+			//a* data = new a[10];
+		}
+	}
     Test::setA(1);
     Test::setA(2);
     std::cout << "a = " << Test::getA() << std::endl;
     std::cout << "Hello World!\n";
 
-    int tmp_windeposit = 1020;
-    int fee = tmp_windeposit * 10 / 100 ;
+    std::cout << __cplusplus << std::endl;
+    print(1, "2323", 43);
+    
+    for (int i = 0; i < 100; i++)
+    {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_real_distribution<> dis(1, 300);
+        std::cout << "random:" <<dis(gen) << std::endl ;
+    }
 
-    if (tmp_windeposit <= 100) {			// 100两以下不收
-        fee *= 0;
-    }
-    else if (tmp_windeposit <= 10000) {	// 1万两以下
-    }
-    else if (tmp_windeposit <= 100000) {	// 10万两以下
-        fee *= (int)ceil((double)tmp_windeposit / 20000);
-    }
-    else {							// 10万两以上
-        fee *= 5;
-    }
-    std::cout << "fee = " << fee << std::endl;
+    for (int i = 0; i < 100; i++)
+    {
+        static std::default_random_engine default_engine(time(nullptr));
+        const auto raw_result = default_engine();
+        std::cout << "raw_result:" << raw_result << std::endl;
 
-    B b1;
+    }
 
+    std::array<int, 5> arrTmp = {};
+    for (int i = 0; i < arrTmp.size(); i++)
+    {
+        std::cout << arrTmp[i] << std::endl;
+    }
+
+    std::map<int, int> v;
+    for (int i  = 0; i < 1000; i ++)
+    {
+        auto n = std::chrono::system_clock::now();
+        auto time = std::chrono::system_clock::to_time_t(n);
+        v[time % 10] = 1;
+        std::cout << time << std::endl;
+    }
+    for (auto a : v)
+    {
+        std::cout << a.first << " " << a.second << std::endl;
+    }
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
