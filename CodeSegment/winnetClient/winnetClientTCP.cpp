@@ -1,17 +1,6 @@
-ï»¿// winnetClientTCP.cpp : æ­¤æ–‡ä»¶åŒ…å« "main" å‡½æ•°ã€‚ç¨‹åºæ‰§è¡Œå°†åœ¨æ­¤å¤„å¼€å§‹å¹¶ç»“æŸã€‚
-// tcp å®¢æˆ·ç«¯
-//===============================================================
-//Summary:
-//          winnetClientTCP ç±»ï¼Œ 
-//FileName:
-//          winnetClientTCP.cpp
-//Remarks:
-//          ...
-//Date:
-//          2019/7/16
-//Author:
-//          chenqi(chenqi@comfun.com)
-//===============================================================
+// winnetClientTCP.cpp : ´ËÎÄ¼ş°üº¬ "main" º¯Êı¡£³ÌĞòÖ´ĞĞ½«ÔÚ´Ë´¦¿ªÊ¼²¢½áÊø¡£
+// tcp ¿Í»§¶Ë
+
 #include "pch.h"
 #include <iostream>
 #include <string>
@@ -20,38 +9,38 @@
 #pragma comment(lib,"ws2_32.lib") 
 int main()
 {
-    // 1ã€ åˆå§‹åŒ–å¥—æ¥å­—:æ·»åŠ å¤´æ–‡ä»¶ï¼ˆ#include <WinSock2.h>ï¼‰ å’Œ libåº“ï¼ˆ#pragma comment(lib,"ws2_32.lib")
+    // 1¡¢ ³õÊ¼»¯Ì×½Ó×Ö:Ìí¼ÓÍ·ÎÄ¼ş£¨#include <WinSock2.h>£© ºÍ lib¿â£¨#pragma comment(lib,"ws2_32.lib")
     const int versionL = 1;
     const int versionH = 1;
     WSAData wsaData;
     int nErr = WSAStartup(MAKEWORD(versionL, versionH), &wsaData);
     if (0 != nErr)
     {
-        std::cout << " åˆå§‹åŒ–å¥—æ¥å­—å¤±è´¥:" << WSAGetLastError() << std::endl;
+        std::cout << " ³õÊ¼»¯Ì×½Ó×ÖÊ§°Ü:" << WSAGetLastError() << std::endl;
         return 0;
     }
-    // WSAStartup å³ä½¿æ²¡æœ‰æˆ‘éœ€è¦çš„åº“1.1ï¼Œä½†æ˜¯ä¹Ÿä¼šåŠ è½½ç³»ç»Ÿä¸Šçš„åº“ï¼Œæ‰€ä»¥éœ€è¦æ ¡éªŒç‰ˆæœ¬
+    // WSAStartup ¼´Ê¹Ã»ÓĞÎÒĞèÒªµÄ¿â1.1£¬µ«ÊÇÒ²»á¼ÓÔØÏµÍ³ÉÏµÄ¿â£¬ËùÒÔĞèÒªĞ£Ñé°æ±¾
     if (LOBYTE(wsaData.wVersion) != versionL || HIBYTE(wsaData.wVersion) != versionH)
     {
-        std::cout << " åˆå§‹åŒ–å¥—æ¥å­—å¤±è´¥:" << "é”™è¯¯çš„ç½‘ç»œåº“ç‰ˆæœ¬" << std::endl;
+        std::cout << " ³õÊ¼»¯Ì×½Ó×ÖÊ§°Ü:" << "´íÎóµÄÍøÂç¿â°æ±¾" << std::endl;
         return 0;
     }
-    // 2ã€ åˆ›å»ºsocket
-    SOCKET socClient = socket(AF_INET, SOCK_STREAM, 0); // æŒ‡æ˜åœ°å€ç°‡ç±»å‹(IPV4:AF_INET), æŒ‡æ˜socketçš„ç±»å‹(æ•°æ®æŠ¥å¥—æ¥å­—TCP:SOCK_STREAM),æŒ‡æ˜æ•°æ®ä¼ è¾“åè®®/æŒ‡æ˜ç«¯åˆ°ç«¯åè®®
+    // 2¡¢ ´´½¨socket
+    SOCKET socClient = socket(AF_INET, SOCK_STREAM, 0); // Ö¸Ã÷µØÖ·´ØÀàĞÍ(IPV4:AF_INET), Ö¸Ã÷socketµÄÀàĞÍ(Êı¾İ±¨Ì×½Ó×ÖTCP:SOCK_STREAM),Ö¸Ã÷Êı¾İ´«ÊäĞ­Òé/Ö¸Ã÷¶Ëµ½¶ËĞ­Òé
     if (INVALID_SOCKET == socClient)
     {
-        std::cout << " åˆå§‹åŒ–socketå¤±è´¥:" << WSAGetLastError() << std::endl;
+        std::cout << " ³õÊ¼»¯socketÊ§°Ü:" << WSAGetLastError() << std::endl;
         WSACleanup();
         return 0;
     }
-    SOCKADDR_IN addrSrv;//æœåŠ¡å™¨çš„åœ°å€æ•°æ®ç»“æ„
+    SOCKADDR_IN addrSrv;//·şÎñÆ÷µÄµØÖ·Êı¾İ½á¹¹
     addrSrv.sin_family = AF_INET;
-    addrSrv.sin_port = htons(8182);//ç«¯å£å·ä¸º8182
-    inet_pton(AF_INET, "127.0.0.1", &(addrSrv.sin_addr)); // ç­‰ä»·äº:addrSrv.sin_addr.S_un.S_addr = inet_addr("127.0.0.1"); //127.0.0.1ä¸ºæœ¬ç”µè„‘IPåœ°å€
+    addrSrv.sin_port = htons(8182);//¶Ë¿ÚºÅÎª8182
+    inet_pton(AF_INET, "127.0.0.1", &(addrSrv.sin_addr)); // µÈ¼ÛÓÚ:addrSrv.sin_addr.S_un.S_addr = inet_addr("127.0.0.1"); //127.0.0.1Îª±¾µçÄÔIPµØÖ·
 
-    if (0 != connect(socClient, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR))) // connect è¿”å›0 è¡¨ç¤ºè¿æ¥æˆåŠŸ
+    if (0 != connect(socClient, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR))) // connect ·µ»Ø0 ±íÊ¾Á¬½Ó³É¹¦
     {
-        std::cout << " connetå¤±è´¥:" << WSAGetLastError() << std::endl;
+        std::cout << " connetÊ§°Ü:" << WSAGetLastError() << std::endl;
         WSACleanup();
         return 0;
     }
@@ -72,13 +61,13 @@ int main()
     WSACleanup();
 }
 
-// è¿è¡Œç¨‹åº: Ctrl + F5 æˆ–è°ƒè¯• >â€œå¼€å§‹æ‰§è¡Œ(ä¸è°ƒè¯•)â€èœå•
-// è°ƒè¯•ç¨‹åº: F5 æˆ–è°ƒè¯• >â€œå¼€å§‹è°ƒè¯•â€èœå•
+// ÔËĞĞ³ÌĞò: Ctrl + F5 »òµ÷ÊÔ >¡°¿ªÊ¼Ö´ĞĞ(²»µ÷ÊÔ)¡±²Ëµ¥
+// µ÷ÊÔ³ÌĞò: F5 »òµ÷ÊÔ >¡°¿ªÊ¼µ÷ÊÔ¡±²Ëµ¥
 
-// å…¥é—¨æç¤º: 
-//   1. ä½¿ç”¨è§£å†³æ–¹æ¡ˆèµ„æºç®¡ç†å™¨çª—å£æ·»åŠ /ç®¡ç†æ–‡ä»¶
-//   2. ä½¿ç”¨å›¢é˜Ÿèµ„æºç®¡ç†å™¨çª—å£è¿æ¥åˆ°æºä»£ç ç®¡ç†
-//   3. ä½¿ç”¨è¾“å‡ºçª—å£æŸ¥çœ‹ç”Ÿæˆè¾“å‡ºå’Œå…¶ä»–æ¶ˆæ¯
-//   4. ä½¿ç”¨é”™è¯¯åˆ—è¡¨çª—å£æŸ¥çœ‹é”™è¯¯
-//   5. è½¬åˆ°â€œé¡¹ç›®â€>â€œæ·»åŠ æ–°é¡¹â€ä»¥åˆ›å»ºæ–°çš„ä»£ç æ–‡ä»¶ï¼Œæˆ–è½¬åˆ°â€œé¡¹ç›®â€>â€œæ·»åŠ ç°æœ‰é¡¹â€ä»¥å°†ç°æœ‰ä»£ç æ–‡ä»¶æ·»åŠ åˆ°é¡¹ç›®
-//   6. å°†æ¥ï¼Œè‹¥è¦å†æ¬¡æ‰“å¼€æ­¤é¡¹ç›®ï¼Œè¯·è½¬åˆ°â€œæ–‡ä»¶â€>â€œæ‰“å¼€â€>â€œé¡¹ç›®â€å¹¶é€‰æ‹© .sln æ–‡ä»¶
+// ÈëÃÅÌáÊ¾: 
+//   1. Ê¹ÓÃ½â¾ö·½°¸×ÊÔ´¹ÜÀíÆ÷´°¿ÚÌí¼Ó/¹ÜÀíÎÄ¼ş
+//   2. Ê¹ÓÃÍÅ¶Ó×ÊÔ´¹ÜÀíÆ÷´°¿ÚÁ¬½Óµ½Ô´´úÂë¹ÜÀí
+//   3. Ê¹ÓÃÊä³ö´°¿Ú²é¿´Éú³ÉÊä³öºÍÆäËûÏûÏ¢
+//   4. Ê¹ÓÃ´íÎóÁĞ±í´°¿Ú²é¿´´íÎó
+//   5. ×ªµ½¡°ÏîÄ¿¡±>¡°Ìí¼ÓĞÂÏî¡±ÒÔ´´½¨ĞÂµÄ´úÂëÎÄ¼ş£¬»ò×ªµ½¡°ÏîÄ¿¡±>¡°Ìí¼ÓÏÖÓĞÏî¡±ÒÔ½«ÏÖÓĞ´úÂëÎÄ¼şÌí¼Óµ½ÏîÄ¿
+//   6. ½«À´£¬ÈôÒªÔÙ´Î´ò¿ª´ËÏîÄ¿£¬Çë×ªµ½¡°ÎÄ¼ş¡±>¡°´ò¿ª¡±>¡°ÏîÄ¿¡±²¢Ñ¡Ôñ .sln ÎÄ¼ş
