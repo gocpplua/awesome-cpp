@@ -1,6 +1,17 @@
 ﻿// winnetClient.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 // udp 客户端
-
+//===============================================================
+//Summary:
+//          winnetClient 类， 
+//FileName:
+//          winnetClient.cpp
+//Remarks:
+//          ...
+//Date:
+//          2019/7/16
+//Author:
+//          chenqi(chenqi@comfun.com)
+//===============================================================
 #include "pch.h"
 #include <iostream>
 #include <string>
