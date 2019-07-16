@@ -1,3 +1,15 @@
+ï»¿//===============================================================
+//Summary:
+//          SyncQueue ç±»ï¼Œ 
+//FileName:
+//          SyncQueue.hpp
+//Remarks:
+//          ...
+//Date:
+//          2019/7/16
+//Author:   chenqi
+//          chenqi(chenqi@comfun.com)
+//===============================================================
 #pragma once
 #include<iostream>
 #include<list>
@@ -18,31 +30,31 @@ public:
     }
     void Put(T&& x)
     {
-        Add(std::forward<T>(x)); //ÎªÁË±£³ÖxÊÇÔ­À´µÄÀàĞÍ£¬Ê¹ÓÃÍêÃÀ×ª·¢
+        Add(std::forward<T>(x)); //ä¸ºäº†ä¿æŒxæ˜¯åŸæ¥çš„ç±»å‹ï¼Œä½¿ç”¨å®Œç¾è½¬å‘
     }
 
     void Take(std::list<T>& list)
     {
         std::unique_lock<std::mutex> locker(m_mutex);
-        m_notEmpty.wait(locker, [this] {return m_needStop || NotEmpty(); }); //lambda±í´ïÊ½Ê¡ÂÔÁË²ÎÊı
+        m_notEmpty.wait(locker, [this] {return m_needStop || NotEmpty(); }); //lambdaè¡¨è¾¾å¼çœç•¥äº†å‚æ•°
         if (m_needStop)
         {
             return;
         }
         list = std::move(m_queue);
-        m_notFull.notify_one(); // »½ĞÑÒ»¸öÕıÔÚµÈ´ıµÄÏß³Ì
+        m_notFull.notify_one(); // å”¤é†’ä¸€ä¸ªæ­£åœ¨ç­‰å¾…çš„çº¿ç¨‹
     }
     void Take(T& t)
     {
         std::unique_lock<std::mutex> locker(m_mutex);
-        m_notEmpty.wait(locker, [this] {return m_needStop || NotEmpty(); }); //lambda±í´ïÊ½Ê¡ÂÔÁË²ÎÊı
+        m_notEmpty.wait(locker, [this] {return m_needStop || NotEmpty(); }); //lambdaè¡¨è¾¾å¼çœç•¥äº†å‚æ•°
         if (m_needStop)
         {
             return;
         }
         t = m_queue.front();
         m_queue.pop_front();
-        m_notFull.notify_one(); // »½ĞÑÒ»¸öÕıÔÚµÈ´ıµÄÏß³Ì
+        m_notFull.notify_one(); // å”¤é†’ä¸€ä¸ªæ­£åœ¨ç­‰å¾…çš„çº¿ç¨‹
     }
     void Stop()
     {
@@ -81,7 +93,7 @@ private:
         if (full)
         {
             std::lock_guard<std::recursive_mutex> locker(g_coutmutex);
-            std::cout << "»º³åÇøÂúÁË,ĞèÒªµÈ´ı...Ïß³ÌID:" << std::this_thread::get_id() << std::endl;
+            std::cout << "ç¼“å†²åŒºæ»¡äº†,éœ€è¦ç­‰å¾…...çº¿ç¨‹ID:" << std::this_thread::get_id() << std::endl;
         }
         return !full;
     }
@@ -91,7 +103,7 @@ private:
         if (empty)
         {
             std::lock_guard<std::recursive_mutex> locker(g_coutmutex);
-            std::cout << "»º³åÇø¿ÕÁË,ĞèÒªµÈ´ı...Ïß³ÌID:" << std::this_thread::get_id() << std::endl;
+            std::cout << "ç¼“å†²åŒºç©ºäº†,éœ€è¦ç­‰å¾…...çº¿ç¨‹ID:" << std::this_thread::get_id() << std::endl;
         }
         return !empty;
     }
@@ -99,7 +111,7 @@ private:
     void Add(F&& x)
     {
         std::unique_lock<std::mutex> locker(m_mutex);
-        m_notFull.wait(locker, [this] {return m_needStop || NotFull(); }); //lambda±í´ïÊ½Ê¡ÂÔÁË²ÎÊı
+        m_notFull.wait(locker, [this] {return m_needStop || NotFull(); }); //lambdaè¡¨è¾¾å¼çœç•¥äº†å‚æ•°
         if (m_needStop)
         {
             return;
