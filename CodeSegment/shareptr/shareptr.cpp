@@ -4,6 +4,7 @@
 #include "pch.h"
 #include <iostream>
 #include <mutex>
+#include <memory>
 #include <unordered_map>
 class MyClass
 {
@@ -45,7 +46,7 @@ void AddUser(int userid, const std::shared_ptr<MyClass> &user)
     rooms_[userid] = user;
 }
 
-int main()
+int mainshareptr()
 {
     std::shared_ptr<MyClass> class1 = GetUser(1);
     std::shared_ptr<MyClass> class2 = GetUser(2);
@@ -88,7 +89,36 @@ int main()
 
 
     std::cout << "Hello World!\n";
+	return 0;
 }
+
+// begin:测试 reset
+struct Foo {
+	Foo(int n = 0) noexcept : bar(n) {
+		std::cout << "Foo: constructor, bar = " << bar << '\n';
+	}
+	~Foo() {
+		std::cout << "Foo: destructor, bar = " << bar << '\n';
+	}
+	int getBar() const noexcept { return bar; }
+private:
+	int bar;
+};
+
+int main() {
+	std::shared_ptr<Foo> sptr = std::make_shared<Foo>(1);
+	std::cout << "The first Foo's bar is " << sptr->getBar() << "\n";
+
+	// 重置，交与新的 Foo 实例
+	// （此调用后将销毁旧实例）
+	sptr.reset(new Foo);
+	std::cout << "The second Foo's bar is " << sptr->getBar() << "\n";
+	return 0;
+}
+// end:测试 reset
+
+
+
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单
