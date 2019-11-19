@@ -57,7 +57,7 @@ unsigned long long getThreadIdOfString(const std::thread::id & id)
     return tid;
 }
 
-int main()
+int mainThreadMessage()
 {
     std::thread t1(func1);
     std::thread::id tID1 =  t1.get_id();

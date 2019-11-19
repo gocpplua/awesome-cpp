@@ -16,3 +16,7 @@ CodeSegment/Release/
 CodeSegment/pb3/cmakepb3.6.1/
 CodeSegment/pb3/protobuf-all-3.6.1/
 CodeSegment/shareptr/Debug/
+/CodeSegment/.vs/CodeSegment/v15
+/CodeSegment/.vs/config
+/CodeSegment/pb3/.vs/protobuf/v15
+/CodeSegment/pb3/pbc-master/.vs/pbc/v15

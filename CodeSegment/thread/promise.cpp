@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include <iostream>
 #include<thread>
 #include<future>
@@ -11,14 +11,14 @@ int func(int x)
     return x + 2;
 }
 
-int main()
+int mainPromise()
 {
     std::packaged_task<int(int)> task(func);
     std::future<int> fut = task.get_future();
 
     std::thread(std::move(task), 2).detach();
     std::cout << "11111 " << std::endl;
-    int value = fut.get(); //ÕâÀï»áµÈ´ýÏß³Ì½áÊøÔÚÍùÏÂÖ´ÐÐ
+    int value = fut.get(); //è¿™é‡Œä¼šç­‰å¾…çº¿ç¨‹ç»“æŸåœ¨å¾€ä¸‹æ‰§è¡Œ
     std::cout << "the result is " << value << std::endl;
 
     std::vector<std::shared_future<int>> v;
