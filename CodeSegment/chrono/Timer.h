@@ -1,18 +1,16 @@
-﻿// C++ 工具库: 
+﻿#pragma once
+// C++ 工具库: 
 // 1、计时器Timer
-#include <iostream>
 #include<chrono>
-#include <thread>
-
 namespace YQTools {
     class Timer {
     public:
-        Timer():timebegin_(std::chrono::high_resolution_clock::now()){}
+        Timer() :timebegin_(std::chrono::high_resolution_clock::now()) {}
         void reset() {
             timebegin_ = std::chrono::high_resolution_clock::now();
         }
 
-        template<typename Duration=std::chrono::milliseconds>
+        template<typename Duration = std::chrono::milliseconds>
         // 默认是毫秒
         int64_t elapsed() const {
             return std::chrono::duration_cast<Duration>(std::chrono::high_resolution_clock::now() - timebegin_).count();
@@ -42,18 +40,4 @@ namespace YQTools {
     private:
         std::chrono::time_point<std::chrono::high_resolution_clock> timebegin_;
     };
-}
-
-int main() {
-    YQTools::Timer tm;
-    std::this_thread::sleep_for(std::chrono::seconds(6));
-    std::cout << tm.elapsed() << std::endl;
-    std::cout << tm.elapsed_hours() << std::endl;
-    std::cout << tm.elapsed_minutes() << std::endl;
-    std::cout << tm.elapsed_s() << std::endl;
-    std::cout << tm.elapsed_ms() << std::endl;
-
-    tm.reset();
-    std::cout << tm.elapsed_us() << std::endl;
-    return 0;
 }

@@ -154,6 +154,9 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="detach.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="mutex.cpp" />
     <ClCompile Include="onceflag.cpp" />
     <ClCompile Include="pch.cpp">
