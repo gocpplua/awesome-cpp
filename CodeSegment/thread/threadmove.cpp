@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include <iostream>
 #include<thread>
 
@@ -21,7 +21,7 @@ int mainMove()
     {
         std::cout << __LINE__ << "t1 is not joinable" << std::endl;
     }
-    std::thread t2(std::move(t1));//´ËÊ±t1 is not joinable£¬t2 is joinable
+    std::thread t2(std::move(t1));//æ­¤æ—¶t1 is not joinableï¼Œt2 is joinable
     if (t1.joinable())
     {
         std::cout << __LINE__ << "t1 is joinable" << std::endl;
@@ -30,7 +30,7 @@ int mainMove()
     {
         std::cout << __LINE__ << "t1 is not joinable" << std::endl;
     }
-    std::thread t3(std::move(t1)); //´ËÊ±t3 is not joinable, ÎÒÃÇ²»ÄÜÊ¹ÓÃt3.join()
+    std::thread t3(std::move(t1)); //æ­¤æ—¶t3 is not joinable, æˆ‘ä»¬ä¸èƒ½ä½¿ç”¨t3.join()
     t2.join();
     return 0;
 }

@@ -26,7 +26,7 @@ void funcArgs(int a)
 	std::cout << "end " << __FUNCTION__ << ":thread id = " << std::this_thread::get_id() << ", a = " << a << std::endl;
 
 }
-int main()
+int mainthread()
 {
 	std::cout << "main thread id:" << std::this_thread::get_id() << std::endl;
 	std::thread t1(func);

@@ -11,7 +11,7 @@ int func(int x)
     return x + 2;
 }
 
-int mainPromise()
+int main()
 {
     std::packaged_task<int(int)> task(func);
     std::future<int> fut = task.get_future();
