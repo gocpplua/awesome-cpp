@@ -31,7 +31,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "csv", "csv\csv.vcxproj", "{
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "creatocpu100", "creatocpu100\creatocpu100.vcxproj", "{AC2A9649-04EC-4FBD-A9DF-663101D2A1E1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "chrono", "chrono\chrono.vcxproj", "{B26D2AE6-CD1E-449D-9D56-B7ADFEDB293C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YQTools", "YQTools\YQTools.vcxproj", "{B26D2AE6-CD1E-449D-9D56-B7ADFEDB293C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
