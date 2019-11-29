@@ -19,9 +19,13 @@ int main()
     return 0;
 }
 #endif
-
-
+#include <iostream>
+#include "Singleton.h"
 int main()
 {
+    if (Singleton::getInstance().print())
+    {
+        std::cout << "singleton" << std::endl;
+    }
 	return 0;
 }

@@ -79,8 +79,10 @@
   <ItemGroup>
     <ClCompile Include="chrono.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Singleton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
