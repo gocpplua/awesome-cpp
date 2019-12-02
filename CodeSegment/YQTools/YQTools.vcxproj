@@ -79,7 +79,6 @@
   <ItemGroup>
     <ClCompile Include="chrono.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Singleton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h" />
