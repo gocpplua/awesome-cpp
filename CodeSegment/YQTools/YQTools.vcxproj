@@ -81,6 +81,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="constructor.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
