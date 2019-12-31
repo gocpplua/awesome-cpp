@@ -32,7 +32,7 @@ int main()
 	return 0;
 }
 #endif
-
+#pragma optimize( "", off )
 #include <iostream>
 #include "constructor.h"
 using namespace std;

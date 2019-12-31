@@ -1,4 +1,5 @@
 ﻿#pragma once
+#pragma optimize( "", off )
 #include <iostream>
 using namespace std;
 
