@@ -9,6 +9,7 @@
 #include <random>
 #include <array>
 #include <time.h>
+#include <memory>
 class A {
     virtual int test() { return 1; };
 };
@@ -38,7 +39,7 @@ private:
 	int m_b;
 };
 
-int main()
+int main1()
 {
 	for (int i = 0; i < 1000; i++)
 	{
@@ -89,6 +90,7 @@ int main()
     {
         std::cout << a.first << " " << a.second << std::endl;
     }
+    return 0;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
