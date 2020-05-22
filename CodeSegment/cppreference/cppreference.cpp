@@ -3,10 +3,12 @@
 
 #include <iostream>
 #include "and_eq.h"
+#include "system.h"
 int main()
 {
     std::cout << "start main" << std::endl;
-    test_and_ed();
+    //test_and_ed();
+    t_system();
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
