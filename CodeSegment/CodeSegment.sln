@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CodeSegment", "CodeSegment\CodeSegment.vcxproj", "{EFB77807-4706-4BB0-9408-92277C241572}"
 EndProject
@@ -34,6 +34,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YQTools", "YQTools\YQTools.vcxproj", "{B26D2AE6-CD1E-449D-9D56-B7ADFEDB293C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "concurrency", "concurrency\concurrency.vcxproj", "{15634DE1-4E96-4A8B-8D0A-320C85C2461A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cppreference", "cppreference\cppreference.vcxproj", "{EA5749D5-9D76-4582-8724-D0E3648A060E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -297,6 +299,22 @@ Global
 		{15634DE1-4E96-4A8B-8D0A-320C85C2461A}.Release|x64.ActiveCfg = Release|Win32
 		{15634DE1-4E96-4A8B-8D0A-320C85C2461A}.Release|x86.ActiveCfg = Release|Win32
 		{15634DE1-4E96-4A8B-8D0A-320C85C2461A}.Release|x86.Build.0 = Release|Win32
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Debug|Win32.Build.0 = Debug|Win32
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Debug|x64.ActiveCfg = Debug|x64
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Debug|x64.Build.0 = Debug|x64
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Debug|x86.ActiveCfg = Debug|Win32
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Debug|x86.Build.0 = Debug|Win32
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Release|Win32.ActiveCfg = Release|Win32
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Release|Win32.Build.0 = Release|Win32
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Release|x64.ActiveCfg = Release|x64
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Release|x64.Build.0 = Release|x64
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Release|x86.ActiveCfg = Release|Win32
+		{EA5749D5-9D76-4582-8724-D0E3648A060E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
