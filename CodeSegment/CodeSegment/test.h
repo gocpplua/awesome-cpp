@@ -64,3 +64,44 @@ public:
         sendClear(info);
     }
 };
+
+
+
+class LeetCode7 {
+public:
+    // -2147483648 ~2147483647
+    int reverse(int x) {
+        int source = x;
+        int target = 0;
+        bool positive = source > 0 ? true : false;
+        while (source != 0)
+        {
+            int remain = source % 10;
+            source /= 10;
+            if (positive)
+            {
+                if (target > 214748364)
+                {
+                    return 0;
+                }
+                else if (target == 214748364 && remain > 7)
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                if (target < -214748364)
+                {
+                    return 0;
+                }
+                else if (target == -214748364 && remain < -8)
+                {
+                    return 0;
+                }
+            }
+            target = target * 10 + remain;
+        }
+        return target;
+    }
+};
