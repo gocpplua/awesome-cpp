@@ -104,4 +104,35 @@ public:
         }
         return target;
     }
+
+    bool isPalindrome(int x) {
+        int source = x;
+        int target = 0;
+        if (x < 0 || (x % 10 == 0 && x != 0))
+        {
+            return false;
+        }
+        else if (x > 0)
+        {
+            while (target < source)
+            {
+                target = target * 10 + source % 10;
+                if (target == source)
+                {
+                    return true;
+                }
+
+                source /= 10;
+                if (target == source)
+                {
+                    return true;
+                }
+            }
+        }
+        else
+        {
+            return true;
+        }
+        return false;
+    }
 };
