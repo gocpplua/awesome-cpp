@@ -44,8 +44,19 @@ class Mp3 :public BorrowA, public BorrowB {
 };
 
 int main() {
-    Mp3 mp;
-    mp.BorrowA::checkout();// get
+    //Mp3 mp;
+    //mp.BorrowA::checkout();// get
+
+    // -2147483648 ~2147483647
+    LeetCode7 x;
+    std::cout << x.romanToInt("III") << std::endl;
+    std::cout << x.romanToInt("IV") << std::endl;
+    std::cout << x.romanToInt("IX") << std::endl;
+    std::cout << x.romanToInt("LVIII") << std::endl;
+    std::cout << x.romanToInt("MCMXCIV") << std::endl;
+
+    std::cout << x.longestCommonPrefix(std::vector<std::string>({"aa", "a"})) << std::endl;
+
 }
 
 int mainDDDD() {

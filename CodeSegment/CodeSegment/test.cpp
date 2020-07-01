@@ -1,5 +1,8 @@
-﻿#include "test.h"
+﻿#include <vector>
+#include <string>
+#include "test.h"
 #include "pch.h"
+using namespace std;
 
 Test1::Test1()
 {

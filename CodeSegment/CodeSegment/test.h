@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <string>
+using namespace std;
 class Test;
 class Test1 {
 public:
@@ -134,5 +135,132 @@ public:
             return true;
         }
         return false;
+    }
+
+
+    int getValue(char pre, char cur) {
+        switch (pre) {
+        case 'I': return (cur == 'V' || cur == 'X') ? -1 : 1;
+        case 'V': return 5;
+        case 'X': return (cur == 'L' || cur == 'C') ? -10 : 10;
+        case 'L': return 50;
+        case 'C': return (cur == 'D' || cur == 'M') ? -100 : 100;
+        case 'D': return 500;
+        case 'M': return 1000;
+        default: return 0;
+        }
+    }
+    int romanToInt(std::string s) {
+        int target = 0;
+        int len = s.length();
+        if (len <= 0) return 0;
+        char pre = s[0];
+        for (int i = 1; i < len; i++)
+        {
+            char current = s[i];
+            target += getValue(pre, current);
+            pre = current;
+        }
+        target += getValue(pre, ' '); // 特别注意最后一位的问题
+        return target;
+    }
+
+    int romanToInt1(std::string s) {
+        int target = 0;
+        int len = s.length();
+        for (int i = 0; i < len; i++)
+        {
+            char c = s[i];
+            if (c == 'I')
+            {
+                if (i < len - 1)
+                {
+                    if (s[i+1] == 'V')
+                    {
+                        target += 4;
+                        i++;
+                        continue;
+                    }
+                    else if (s[i+1]== 'X')
+                    {
+                        target += 9;
+                        i++;
+                        continue;
+                    }
+                }
+                target += 1;
+            }
+            else if (c == 'X')
+            {
+                if (i < len - 1)
+                {
+                    if (s[i+1] == 'L')
+                    {
+                        target += 40;
+                        i++;
+                        continue;
+                    }
+                    else if (s[i+1] == 'C')
+                    {
+                        target += 90;
+                        i++;
+                        continue;
+                    }
+                }
+                target += 10;
+            }
+            else if (c == 'C')
+            {
+                if (i < len - 1)
+                {
+                    if (s[i+1] == 'D')
+                    {
+                        target += 400;
+                        i++;
+                        continue;
+                    }
+                    else if (s[i+1] == 'M')
+                    {
+                        target += 900;
+                        i++;
+                        continue;
+                    }
+                }
+                target += 100;
+            }
+            else if (c == 'V')
+            {
+                target += 5;
+            }
+            else if (c == 'L')
+            {
+                target += 50;
+            }
+            else if (c == 'D')
+            {
+                target += 500;
+            }
+            else if (c == 'M')
+            {
+                target += 1000;
+            }
+        }
+        return target;
+    }
+
+    string longestCommonPrefix(vector<string>& strs) {
+        if (!strs.size())return "";
+        string commonPre = strs[0];
+        for (int i = 1; i < strs.size(); i++) {
+            int j = 0;
+            for (; j < commonPre.length() && j < strs[i].length(); j++) {
+                if (commonPre[j] != strs[i][j]) {
+                   break;
+                }
+            }
+            if (j == 0) return "";
+            commonPre[j] = '\0';
+        }
+        return commonPre;
     }
 };
