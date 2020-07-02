@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <string>
+#include <stack>
 using namespace std;
 class Test;
 class Test1 {
@@ -262,5 +263,35 @@ public:
             commonPre[j] = '\0';
         }
         return commonPre;
+    }
+
+
+    bool isValid(string s) {
+        int len = s.length();
+        if (0 == len) return true;
+
+        std::stack<char> mystack;
+        for (int i = 0; i < len; i++)
+        {
+            char currChar = s[i];
+            if (currChar == '(' || currChar == '{' || currChar == '[')
+            {
+                mystack.push(currChar);
+            }
+            else if(currChar == ')' || currChar == '}' || currChar == ']')
+            {
+                if (0 == mystack.size()) return false;
+                char topChar = mystack.top();
+                if ((topChar == '(' && currChar == ')')  || (topChar == '{' && currChar == '}') || (topChar == '[' && currChar == ']'))
+                {
+                    mystack.pop();
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        return 0 == mystack.size() ? true : false;
     }
 };
