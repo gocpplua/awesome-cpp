@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <string>
 #include <stack>
 using namespace std;
@@ -308,5 +308,24 @@ public:
             }
         }
         return i+1;
+    }
+
+    int removeElement(vector<int>& nums, int val) {
+        int len = nums.size();
+        if (0 == len)
+        {
+            return 0;
+        }
+
+        int i = 0, j = 0;
+        for (; i < len; i++)
+        {
+            if (nums[i] != val)
+            {
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+        return j;
     }
 };
