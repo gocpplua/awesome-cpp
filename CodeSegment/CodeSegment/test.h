@@ -294,4 +294,19 @@ public:
         }
         return 0 == mystack.size() ? true : false;
     }
+
+    int removeDuplicates(vector<int>& nums) {
+        int len = nums.size();
+        if (0 == len) return 0;
+        int i = 0, j = 1;
+        for (; j < len; j++)
+        {
+            if (nums[i] != nums[j])
+            {
+                nums[i + 1] = nums[j];
+                i++;
+            }
+        }
+        return i+1;
+    }
 };
