@@ -10,7 +10,13 @@ public:
     //int aa(Test& a){}
     Test bb();
 };
-
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
 
 class Base {
 private:
@@ -327,5 +333,50 @@ public:
             }
         }
         return j;
+    }
+
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if (!l1) return l2;
+        if (!l2) return l1;
+        if (l1->val > l2->val)
+        {
+            // 保证11最小数字
+            ListNode* temp = l1;
+            l1 = l2;
+            l2 = temp;
+        }
+        ListNode* head = l1;
+        for (; l1->next != nullptr && l2->next != nullptr;)
+        {
+            if (l1->val <= l2->val && l2->val <= l1->next->val)
+            {
+                ListNode* temp1 = l1->next;
+                ListNode* temp2 = l2->next;
+                l1->next = l2;
+                l2->next = temp1;
+                l2 = temp2;
+            }
+            else
+            {
+                if (l1->val <= l2->val)
+                {
+                    l1 = l1->next;
+                }
+                else
+                {
+                    l2 = l2->next;
+                }
+            }
+        }
+        if (l1->next == nullptr)
+        {
+            l1->next = l2;
+        }
+        if (l2->next == nullptr)
+        {
+            l2->next = l1;
+        }
+
+        return head;
     }
 };

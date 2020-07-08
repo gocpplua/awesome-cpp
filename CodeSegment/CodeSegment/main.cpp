@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
@@ -49,13 +49,15 @@ int main() {
 
     // -2147483648 ~2147483647
     LeetCode7 x;
-    std::cout << x.romanToInt("III") << std::endl;
-    std::cout << x.romanToInt("IV") << std::endl;
-    std::cout << x.romanToInt("IX") << std::endl;
-    std::cout << x.romanToInt("LVIII") << std::endl;
-    std::cout << x.romanToInt("MCMXCIV") << std::endl;
+    ListNode a4(4, nullptr);
+    ListNode a22(2, &a4);
+    ListNode a2(2, &a22);
+    ListNode a1(1, &a2);
 
-    std::cout << x.longestCommonPrefix(std::vector<std::string>({"aa", "a"})) << std::endl;
+    ListNode b6(6, nullptr);
+    ListNode b3(3, &b6);
+    ListNode b1(1, &b3);
+    x.mergeTwoLists(&a1, &b1);
 
 }
 
