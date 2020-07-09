@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
@@ -48,15 +48,17 @@ int main() {
     //mp.BorrowA::checkout();// get
 
     // -2147483648 ~2147483647
+    //[-10,-9,-6,-4,1,9,9]
+    //[-5, -3, 0, 7, 8, 8]
     LeetCode7 x;
     ListNode a4(4, nullptr);
     ListNode a22(2, &a4);
     ListNode a2(2, &a22);
-    ListNode a1(1, &a2);
+    ListNode a1(1, nullptr);
 
     ListNode b6(6, nullptr);
     ListNode b3(3, &b6);
-    ListNode b1(1, &b3);
+    ListNode b1(2, nullptr);
     x.mergeTwoLists(&a1, &b1);
 
 }

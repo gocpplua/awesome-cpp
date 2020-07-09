@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include <stack>
 using namespace std;
@@ -346,21 +346,40 @@ public:
             l2 = temp;
         }
         ListNode* head = l1;
-        for (; l1->next != nullptr && l2->next != nullptr;)
+        ListNode* next = nullptr; //防止l2的数据添加到l1后，再去和来l2数据比较大小
+
+        for (; l1 != nullptr || l2 != nullptr;)
         {
+            if (l1->next == nullptr)
+            {
+                l1->next = l2;
+                return head;
+            }
+            if (l2 == nullptr)
+            {
+                return head;
+            }
             if (l1->val <= l2->val && l2->val <= l1->next->val)
             {
-                ListNode* temp1 = l1->next;
+                next = l1->next;
                 ListNode* temp2 = l2->next;
                 l1->next = l2;
-                l2->next = temp1;
+                l2->next = next;
                 l2 = temp2;
             }
             else
             {
                 if (l1->val <= l2->val)
                 {
-                    l1 = l1->next;
+                    if (next)
+                    {
+                        l1 = next;
+                        next = nullptr;
+                    }
+                    else
+                    {
+                        l1 = l1->next;
+                    }
                 }
                 else
                 {
@@ -368,15 +387,7 @@ public:
                 }
             }
         }
-        if (l1->next == nullptr)
-        {
-            l1->next = l2;
-        }
-        if (l2->next == nullptr)
-        {
-            l2->next = l1;
-        }
-
+        
         return head;
     }
 };
