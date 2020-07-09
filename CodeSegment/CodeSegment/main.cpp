@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
@@ -48,18 +48,33 @@ int main() {
     //mp.BorrowA::checkout();// get
 
     // -2147483648 ~2147483647
+
+
+    LeetCode7 x;
     //[-10,-9,-6,-4,1,9,9]
     //[-5, -3, 0, 7, 8, 8]
-    LeetCode7 x;
-    ListNode a4(4, nullptr);
-    ListNode a22(2, &a4);
-    ListNode a2(2, &a22);
-    ListNode a1(1, nullptr);
+    std::vector<int> vecA({ -10,-9,-6,-4,1,9,9 });
+    std::vector<int> vecB({ -5, -3, 0, 7, 8, 8 });
+    {
+        int aSize = vecA.size();
+        int bSize = vecB.size();
+        ListNode* a1 = new ListNode[aSize];
+        ListNode* b1 = new ListNode[bSize];
+        for (int i = 0; i < aSize - 1; i++)
+        {
+            a1[i].val = vecA[i];
+            a1[i].next = &(a1[i + 1]);
+        }
+        a1[aSize - 1].val = vecA[aSize - 1];
+        for (int i = 0; i < bSize - 1; i++)
+        {
+            b1[i].val = vecB[i];
+            b1[i].next = &(b1[i + 1]);
+        }
+        b1[bSize - 1].val = vecB[bSize - 1];
 
-    ListNode b6(6, nullptr);
-    ListNode b3(3, &b6);
-    ListNode b1(2, nullptr);
-    x.mergeTwoLists(&a1, &b1);
+        x.mergeTwoLists(a1, b1);
+    }
 
 }
 
