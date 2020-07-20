@@ -390,4 +390,71 @@ public:
         
         return head;
     }
+
+    string generateSayStr(const string& originalStr) {
+        string destinationStr;
+        int len = originalStr.length();
+        if (0 == len) return "";
+        int count = 1;
+        int currChar = originalStr[0];
+        for (int i = 1; i < len; i++)
+        {
+            if (currChar != originalStr[i])
+            {
+                destinationStr += (48 + count);
+                destinationStr += currChar;
+                count = 1;
+                currChar = originalStr[i];
+            }
+            else
+            {
+                count++;
+            }
+        }
+        destinationStr += (48 + count);
+        destinationStr += currChar;
+        return destinationStr;
+    }
+    string countAndSay(int n) {
+
+    }
+
+    // 66.加一
+    int addOne(const int  nums[], int count)
+    {
+        int len = count;
+        int up = 0;
+        if (num[len - 1] != 9)
+        {
+            num[len - 1] += 1;
+            return 0;
+        }
+        else
+        {
+            num[len - 1] = 0;
+            up = 1;
+        }
+    
+        for (int i = len - 2; i >= 0; i--)
+        {
+            if (num[i] + up > 9)
+            {
+                num[i] = 0;
+                up = 1;
+            }
+            else
+            {
+                num[i] += up;
+                up = 0;
+                break;
+            }
+        }
+
+        if (up > 0)
+        {
+            //先输出up，再输出数组
+        }
+    
+    }
+
 };
