@@ -417,35 +417,59 @@ public:
         return destinationStr;
     }
     string countAndSay(int n) {
+        return "";
+    }
 
+    int strStr(string haystack, string needle) {
+        int len1 = haystack.length();
+        int len2 = needle.length();
+        if (0 == len2) return 0;
+
+        for (int i = 0; i <= len1 - len2; i++)
+        {
+            bool bFind = true;
+            for (int j = 0; j < len2; j++)
+            {
+                if (haystack[i + j] != needle[j])
+                {
+                    bFind = false;
+                    break;
+                }
+            }
+            if (bFind)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 
     // 66.加一
-    int addOne(const int  nums[], int count)
+    int addOne(int  nums[], int count)
     {
         int len = count;
         int up = 0;
-        if (num[len - 1] != 9)
+        if (nums[len - 1] != 9)
         {
-            num[len - 1] += 1;
+            nums[len - 1] = nums[len - 1] + 1;
             return 0;
         }
         else
         {
-            num[len - 1] = 0;
+            nums[len - 1] = 0;
             up = 1;
         }
     
         for (int i = len - 2; i >= 0; i--)
         {
-            if (num[i] + up > 9)
+            if (nums[i] + up > 9)
             {
-                num[i] = 0;
+                nums[i] = 0;
                 up = 1;
             }
             else
             {
-                num[i] += up;
+                nums[i] = nums[i] + up;
                 up = 0;
                 break;
             }
