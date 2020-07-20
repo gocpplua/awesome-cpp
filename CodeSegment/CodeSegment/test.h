@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <stack>
+#include <algorithm>
 using namespace std;
 class Test;
 class Test1 {
@@ -442,6 +443,43 @@ public:
             }
         }
         return -1;
+    }
+
+    int maxSubArray(vector<int>& nums) {
+        int nLen = nums.size();
+        if (0 == nLen) return 0;
+        if (1 == nLen) return nums[0];
+        int pre = 0;
+        int nMax = nums[0];
+        for (int i = 0; i < nLen; i++)
+        {
+            pre = std::max(pre + nums[i], nums[i]);
+            nMax = std::max(nMax, pre);
+        }
+        return nMax;
+    }
+    // 58. 最后一个单词的长度
+    int lengthOfLastWord(string s) {
+        int nLen = s.length();
+        int end = nLen - 1;
+        int start = 0;
+        for (int i = nLen - 1; i >= 0; i--)
+        {
+            if (s[i] != ' ')
+            {
+                end = i;
+                break;
+            }
+        }
+
+        for (int i = end; i >= 0; i--)
+        {
+            if (s[i] == ' ')
+            {
+                return end - i;
+            }
+        }
+        return end + 1;
     }
 
     // 66.加一
