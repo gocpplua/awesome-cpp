@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <string>
 #include <stack>
 using namespace std;
@@ -346,7 +346,7 @@ public:
             l2 = temp;
         }
         ListNode* head = l1;
-        ListNode* next = nullptr; //防止l2的数据添加到l1后，再去和来l2数据比较大小
+        ListNode* next = nullptr;
 
         for (; l1 != nullptr || l2 != nullptr;)
         {
@@ -361,10 +361,11 @@ public:
             }
             if (l1->val <= l2->val && l2->val <= l1->next->val)
             {
-                next = l1->next;
+                next = l2;
+                ListNode* temp1 = l1->next;
                 ListNode* temp2 = l2->next;
                 l1->next = l2;
-                l2->next = next;
+                l2->next = temp1;
                 l2 = temp2;
             }
             else
