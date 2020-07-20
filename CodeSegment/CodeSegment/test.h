@@ -483,41 +483,41 @@ public:
     }
 
     // 66.加一
-    int addOne(int  nums[], int count)
+    vector<int> plusOne(vector<int>& digits) 
     {
-        int len = count;
+        int len = digits.size();
         int up = 0;
-        if (nums[len - 1] != 9)
+        if (digits[len - 1] != 9)
         {
-            nums[len - 1] = nums[len - 1] + 1;
-            return 0;
+            digits[len - 1] = digits[len - 1] + 1;
+            return digits;
         }
         else
         {
-            nums[len - 1] = 0;
+            digits[len - 1] = 0;
             up = 1;
         }
     
         for (int i = len - 2; i >= 0; i--)
         {
-            if (nums[i] + up > 9)
+            if (digits[i] + up > 9)
             {
-                nums[i] = 0;
+                digits[i] = 0;
                 up = 1;
             }
             else
             {
-                nums[i] = nums[i] + up;
+                digits[i] = digits[i] + up;
                 up = 0;
-                break;
+                return digits;
             }
         }
 
         if (up > 0)
         {
-            //先输出up，再输出数组
+            digits.insert(digits.begin(), up);
         }
-    
+        return digits;
     }
 
 };
