@@ -522,30 +522,20 @@ public:
 
     // 67. 二进制求和
     string addBinary(string a, string b) {
-        int nLena = a.length();
-        int nLenb = b.length();
-        if (0 == nLena) return b;
-        if (0 == nLenb) return a;
+        int n = a.size();
+        int m = b.size();
+        string ans;
 
-        string strResult;
-        int nIndexa = nLena - 1;
-        int nIndexb = nLenb - 1;
-        int up = 0;
-        while (nIndexa >= 0 || nIndexb >= 0)
-        {
-            int na = nIndexa >= 0 ? a[nIndexa] - '0' : 0;
-            int nb = nIndexb >= 0 ? b[nIndexb] - '0' : 0;
-            strResult += ((na + nb + up) % 2 + '0');
-            up = (na + nb + up) >> 1;
-            nIndexa--;
-            nIndexb--;
+        n > m ? b.insert(0, n - m, '0') : a.insert(0, m - n, '0');
+        int len = a.size();
+        int sum = 0;
+        for (int i = len - 1; i >= 0; i--) {
+            sum = (a[i] - '0') + (b[i] - '0') + sum / 2; // 这个sum 表示前一次的和，如果是2就进位，很机智
+            ans += char(sum % 2 + '0');
         }
 
-        if (up > 0)
-        {
-            strResult += (up + '0');
-        }
-        std::reverse(strResult.begin(), strResult.end());
-        return strResult;
+        if (sum / 2 == 1)  ans += '1';
+        reverse(ans.begin(), ans.end());
+        return ans;
     }
 };
