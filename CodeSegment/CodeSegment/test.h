@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include <stack>
 #include <algorithm>
@@ -520,4 +520,32 @@ public:
         return digits;
     }
 
+    // 67. 二进制求和
+    string addBinary(string a, string b) {
+        int nLena = a.length();
+        int nLenb = b.length();
+        if (0 == nLena) return b;
+        if (0 == nLenb) return a;
+
+        string strResult;
+        int nIndexa = nLena - 1;
+        int nIndexb = nLenb - 1;
+        int up = 0;
+        while (nIndexa >= 0 || nIndexb >= 0)
+        {
+            int na = nIndexa >= 0 ? a[nIndexa] - '0' : 0;
+            int nb = nIndexb >= 0 ? b[nIndexb] - '0' : 0;
+            strResult += ((na + nb + up) % 2 + '0');
+            up = (na + nb + up) >> 1;
+            nIndexa--;
+            nIndexb--;
+        }
+
+        if (up > 0)
+        {
+            strResult += (up + '0');
+        }
+        std::reverse(strResult.begin(), strResult.end());
+        return strResult;
+    }
 };
