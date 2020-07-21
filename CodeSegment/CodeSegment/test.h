@@ -535,7 +535,26 @@ public:
         }
 
         if (sum / 2 == 1)  ans += '1';
-        reverse(ans.begin(), ans.end());
+        std::reverse(ans.begin(), ans.end());
         return ans;
+    }
+
+    int maxArea(vector<int>& height) {
+        int i = 0;
+        int j = height.size() - 1;
+        int maxArea = (j - i - 1) * min(height[i], height[j]);
+        while(i < j)
+        {
+            int area = (j - i) * min(height[i], height[j]);
+            if (maxArea < area) maxArea = area;
+
+            if (height[i] <= height[j]) {
+                i++;
+            }
+            else {
+                j--;
+            }
+        }
+        return maxArea;
     }
 };
