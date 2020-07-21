@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <string>
 #include <stack>
 #include <algorithm>
@@ -18,7 +18,22 @@ struct ListNode {
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
+class Node {
+public:
+    int val;
+    vector<Node*> children;
 
+    Node() {}
+
+    Node(int _val) {
+        val = _val;
+    }
+
+    Node(int _val, vector<Node*> _children) {
+        val = _val;
+        children = _children;
+    }
+};
 class Base {
 private:
     int x;
@@ -556,5 +571,22 @@ public:
             }
         }
         return maxArea;
+    }
+
+    // 589. N叉树的前序遍历
+    vector<int> preorder(Node* root) {
+        std::vector<int> vec;
+        recursive(root, vec);
+        return vec;
+    }
+
+    void recursive(Node* node, vector<int>& vec) {
+        if (!node) return;
+        vec.push_back(node->val);
+        int size = node->children.size();
+        for (int i = 0; i < size; i++)
+        {
+            recursive(node->children[i], vec);
+        }
     }
 };
