@@ -557,4 +557,24 @@ public:
         }
         return maxArea;
     }
+
+    // 104. 二叉树的最大深度
+    struct TreeNode {
+        int val;
+        TreeNode* left;
+        TreeNode* right;
+        TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+    };
+    int maxDepth(TreeNode* root) {
+        if (nullptr == root) return 0;
+        int deep = recursion(root);
+        return deep;
+    }
+    int recursion(TreeNode* root) {
+        if (!root) return 0;
+        int left = recursion(root->left);
+        int right = recursion(root->right);
+        return std::max(left, right) + 1;
+    }
+
 };
