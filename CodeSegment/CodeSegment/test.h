@@ -608,4 +608,14 @@ public:
         int right = recursion104(root->right);
         return std::max(left, right) + 1;
     }
+    // 98. 验证二叉搜索树
+    bool isValidBST(TreeNode* root) {
+        return recursion98(root, LONG_MIN, LONG_MAX);
+    }
+    bool recursion98(TreeNode* root, int lower, int upper) {
+        if (!root) return true;
+        if (root->val  <= lower || root->val >= upper)
+            return false;
+        return recursion98(root->left, lower, root->val) && recursion98(root->right, root->val, upper);
+    }
 };
