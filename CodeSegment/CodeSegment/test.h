@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include <stack>
 #include <algorithm>
@@ -588,5 +588,24 @@ public:
         {
             recursive(node->children[i], vec);
         }
+    }
+
+    // 104. 二叉树的最大深度
+    struct TreeNode {
+        int val;
+        TreeNode* left;
+        TreeNode* right;
+        TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+    };
+    int maxDepth(TreeNode* root) {
+        if (nullptr == root) return 0;
+        int deep = recursion104(root);
+        return deep;
+    }
+    int recursion104(TreeNode* root) {
+        if (!root) return 0;
+        int left = recursion104(root->left);
+        int right = recursion104(root->right);
+        return std::max(left, right) + 1;
     }
 };
