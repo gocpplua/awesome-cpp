@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <string>
 #include <stack>
 #include <algorithm>
@@ -631,4 +631,6 @@ public:
         }
         return preNode;
     }
+
+    // 142. 环形链表 II
 };
