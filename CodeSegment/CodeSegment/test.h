@@ -2,6 +2,7 @@
 #include <string>
 #include <stack>
 #include <algorithm>
+#include <set>
 using namespace std;
 class Test;
 class Test1 {
@@ -633,4 +634,19 @@ public:
     }
 
     // 142. 环形链表 II
+    ListNode *detectCycle(ListNode *head) {
+        std::set<ListNode*> sNode;
+        if (!head) return nullptr;
+        ListNode* pNode = head;
+        while (!pNode)
+        {
+            if (sNode.end() != sNode.find(pNode))
+            {
+                return pNode;
+            }
+            sNode.emplace(pNode);
+            pNode = pNode->next;
+        }
+        return nullptr;
+    }
 };
