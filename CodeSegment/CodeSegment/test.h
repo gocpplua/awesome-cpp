@@ -618,4 +618,17 @@ public:
             return false;
         return recursion98(root->left, lower, root->val) && recursion98(root->right, root->val, upper);
     }
+
+    // 206. 反转链表
+    ListNode* reverseList(ListNode* head) {
+        ListNode* preNode = nullptr;
+        ListNode* currNode = head;
+        while (currNode) {
+            ListNode* tempNode = currNode->next;
+            currNode->next = preNode;
+            preNode = currNode;
+            currNode = tempNode;
+        }
+        return preNode;
+    }
 };
