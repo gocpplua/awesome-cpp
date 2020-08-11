@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
@@ -43,7 +43,7 @@ class Mp3 :public BorrowA, public BorrowB {
 
 };
 
-int main() {
+int mainEEE() {
     //Mp3 mp;
     //mp.BorrowA::checkout();// get
 
@@ -53,29 +53,11 @@ int main() {
     LeetCode7 x;
     //[-10,-9,-6,-4,1,9,9]
     //[-5, -3, 0, 7, 8, 8]
-    std::vector<int> vecA({ -10,-9,-6,-4,1,9,9 });
-    std::vector<int> vecB({ -5, -3, 0, 7, 8, 8 });
-    {
-        int aSize = vecA.size();
-        int bSize = vecB.size();
-        ListNode* a1 = new ListNode[aSize];
-        ListNode* b1 = new ListNode[bSize];
-        for (int i = 0; i < aSize - 1; i++)
-        {
-            a1[i].val = vecA[i];
-            a1[i].next = &(a1[i + 1]);
-        }
-        a1[aSize - 1].val = vecA[aSize - 1];
-        for (int i = 0; i < bSize - 1; i++)
-        {
-            b1[i].val = vecB[i];
-            b1[i].next = &(b1[i + 1]);
-        }
-        b1[bSize - 1].val = vecB[bSize - 1];
-
-        x.mergeTwoLists(a1, b1);
-    }
-
+    x.addBinary("11", "1");
+    int a = 3;
+    a = a >> 1;
+    std::cout << a << std::endl;
+    return 0;
 }
 
 int mainDDDD() {
@@ -197,5 +179,49 @@ int mainman() {
         //std::getline(std::cin, strOper);
     }
 
+    return 0;
+}
+
+
+#include <iostream>
+#include <queue>
+#define N 5
+using namespace std;
+int maze[N][N] = {
+    { 0, 1, 1, 0, 0 },
+    { 0, 0, 1, 1, 0 },
+    { 0, 1, 1, 1, 0 },
+    { 1, 0, 0, 0, 0 },
+    { 0, 0, 1, 1, 0 }
+};
+int visited[N + 1] = { 0, };
+void BFS(int start)
+{
+    queue<int> Q;
+    Q.push(start);
+    visited[start] = 1;
+    while (!Q.empty())
+    {
+        int front = Q.front();
+        cout << front << " ";
+        Q.pop();
+        for (int i = 1; i <= N; i++)
+        {
+            if (!visited[i] && maze[front - 1][i - 1] == 1)
+            {
+                visited[i] = 1;
+                Q.push(i);
+            }
+        }
+    }
+}
+int main()
+{
+    for (int i = 1; i <= N; i++)
+    {
+        if (visited[i] == 1)
+            continue;
+        BFS(i);
+    }
     return 0;
 }
