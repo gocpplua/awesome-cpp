@@ -1,10 +1,17 @@
 ﻿// InsideTheC++ObjectModel.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
-
+#include "P23.h"
 #include <iostream>
 
 int main()
 {
+    Book book;
+    Library_materials thing1;
+    thing1 = book;
+    thing1.check_in();
+
+    Library_materials& thing2 = book;
+    thing2.check_in();
     std::cout << "Hello World!\n";
 }
 
