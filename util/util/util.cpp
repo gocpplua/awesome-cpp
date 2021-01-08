@@ -2,9 +2,23 @@
 //
 
 #include <iostream>
+#include "workthread.h"
+
+#define WORK_THREAD
+
+#ifdef WORK_THREAD
+class MyThread : public util::WorkThread {
+    virtual void work() {
+        std::cout << "MyThread" << std::endl;
+    }
+};
+#endif
 
 int main()
 {
+    MyThread myThread;
+    myThread.start();
+    std::this_thread::sleep_for(std::chrono::seconds(10));
     std::cout << "Hello World!\n";
 }
 
