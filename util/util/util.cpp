@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "workthread.h"
-
+#include "msgbus.h"
 #define WORK_THREAD
 
 #ifdef WORK_THREAD
