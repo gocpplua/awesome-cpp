@@ -20,3 +20,4 @@ CodeSegment/shareptr/Debug/
 /CodeSegment/.vs/config
 /CodeSegment/pb3/.vs/protobuf/v15
 /CodeSegment/pb3/pbc-master/.vs/pbc/v15
+*.db

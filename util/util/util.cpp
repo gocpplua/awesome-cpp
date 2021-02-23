@@ -2,9 +2,11 @@
 //
 
 #include <iostream>
+#include <atomic>
 #include "workthread.h"
 #include "msgbus.h"
-#define WORK_THREAD
+#include "beta/threadpool.h"
+//#define WORK_THREAD
 
 #ifdef WORK_THREAD
 class MyThread : public util::WorkThread {
@@ -12,7 +14,7 @@ class MyThread : public util::WorkThread {
         std::cout << "MyThread" << std::endl;
     }
 };
-#endif
+
 
 int main()
 {
@@ -20,6 +22,22 @@ int main()
     myThread.start();
     std::this_thread::sleep_for(std::chrono::seconds(10));
     std::cout << "Hello World!\n";
+}
+#endif
+
+std::atomic_int ato_count = 0;
+void fun() {
+    std::cout << ato_count++ << endl;
+}
+
+int main() {
+    icharle::ThreadPool pool(3);
+    char c = 'a';
+    do 
+    {
+        c = getchar();
+        pool.addTask(fun);
+    } while (c != 'q');
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

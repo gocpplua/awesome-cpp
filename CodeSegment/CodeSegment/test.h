@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include <stack>
 #include <algorithm>
@@ -648,5 +648,23 @@ public:
             pNode = pNode->next;
         }
         return nullptr;
+    }
+
+    // 141. 环形链表
+    bool hasCycle(ListNode* head) {
+        if (nullptr == head || nullptr == head->next) {
+            return false;
+        }
+
+        ListNode* fast = head->next;
+        ListNode* slow = head;
+        while (nullptr != fast->next && nullptr != fast->next->next) {
+            if (fast == slow) {
+                return true;
+            }
+            fast = fast->next->next;
+            slow = slow->next;
+        }
+        return false;
     }
 };
