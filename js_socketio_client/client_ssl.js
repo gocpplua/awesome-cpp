@@ -1,13 +1,22 @@
 const io = require('socket.io-client')
+const host = "https://127.0.0.1"
 const port =  3001;
 console.log(io.connect)
 const options = {
   secure:true,
   //reconnect: true,
-  rejectUnauthorized : false
+  rejectUnauthorized : false,
+  transportOptions: {
+    polling: {
+      extraHeaders: {
+        'Authorization1': 'chenqi1',
+      },
+    },
+  }
   };
-const socket = io.connect('https://127.0.0.1:' + port, options);
-console.log(`connect https://127.0.0.1:${port}`)
+const uri = `${host}:${port}?token=abc`
+const socket = io.connect(uri, options);
+console.log(uri)
 
 let last;
 function send () {
@@ -37,6 +46,7 @@ socket.on('reconnect_failed', () => {
 
 socket.on('connect', () => {
   console.log(`connect ${socket.id}`);
+ 
   send();
 });
 
