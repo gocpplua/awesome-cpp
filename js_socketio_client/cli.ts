@@ -12,10 +12,34 @@ var  rl = readline.createInterface(process.stdin, process.stdout);
 rl.setPrompt('Test> ');
 rl.prompt();
 
+let netEvents = ["connect", "send", "arkb", "arkbi", "p2se"];
+let errTip = function(){
+  console.log('没有找到命令！ 查看:help');
+}
+
 rl.on('line', function(line) {
   line = line.trim();
+  let delay = 1;
   let splitted = line.split(" ", 2);
-  if(splitted.length == 2 || (splitted.length == 1 && splitted[0] == 'connect')){
+  if(splitted.length > 0){
+    const index = netEvents.findIndex(event => event === splitted[0]);
+    if(index >= 0) delay = 500;
+  }
+
+  if(splitted.length == 1){
+    switch(splitted[0]){
+      case 'help':
+        console.log('connect send arkb arkbi p2se')
+        break;
+      case 'connect':
+        manage.Connect();
+        break;
+      default:
+        errTip();
+        break;
+    }
+  }
+  else if(splitted.length == 2){
     switch(splitted[0]) {
       case 'copy':
           console.log("复制");
@@ -26,9 +50,6 @@ rl.on('line', function(line) {
       case 'close':
           rl.close();
           break;
-      case 'connect':
-        manage.Connect();
-        break;
       case 'send':
         manage.Send(Number(splitted[1]));
         break;
@@ -42,16 +63,16 @@ rl.on('line', function(line) {
         manage.P2S_EnterActivity(Number(splitted[1]));
         break;
       default:
-          console.log('没有找到命令！', line);
-          break;
+        errTip();
+        break;
     }
   }
   else{
-    console.log('命令有错！');
+    errTip();
   }
   setTimeout(()=>{
     rl.prompt();
-  }, 1000)
+  }, delay)
   
 });
 
