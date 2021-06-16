@@ -15,10 +15,12 @@ let options = {
 };
 let uri = `${host}:${port}?token=abc`
 export class MyClient{
-  socket_:any
-    public Connect(){
+  socket_:any;
+  public Connect(id){
       let socket = io.connect(uri, options);
+
       this.socket_ = socket;
+      this.socket_.gid = id;
       socket.on('connect_error', (err) => {
         console.log(`connect_error ${err} `);
       });
@@ -40,9 +42,9 @@ export class MyClient{
       });
       
       socket.on('connect', () => {
-        console.log(`connect ${socket.id}`);
+        console.log(`connect ${socket.id} gid:${this.socket_.gid}`);
         socket.on('message',(data)=>{
-          console.log(data)
+          console.log(this.socket_.gid, data)
         })
       
         setInterval(()=>{
@@ -50,15 +52,19 @@ export class MyClient{
         }, 10000)
       
         socket.on('arkbroadcast',(data)=>{
-          console.log(data)
+          console.log(this.socket_.gid, data)
         })
       
         socket.on('arkbroadcastinroom',(data)=>{
-          console.log(data)
+          console.log(this.socket_.gid, data)
         })
       
+        socket.on('arkbroadcasttoothersinroom',(data)=>{
+          console.log(this.socket_.gid, data)
+        })
+
         socket.on('S2P_EnterActivity', (data)=>{
-          console.log(data)
+          console.log(this.socket_.gid, data)
         })
       });
       
@@ -78,6 +84,10 @@ export class MyClient{
 
     public Send(){
       this.socket_.emit("message", `{"message":"message"}`)
+    }
+
+    public ArkbroadcastToOthersInRoom(){
+      this.socket_.emit("arkbroadcasttoothersinroom", `{"arkbroadcasttoothersinroom":"arkbroadcasttoothersinroom"}`)
     }
 
     public Arkbroadcast(){

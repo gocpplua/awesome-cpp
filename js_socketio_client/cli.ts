@@ -12,7 +12,7 @@ var  rl = readline.createInterface(process.stdin, process.stdout);
 rl.setPrompt('Test> ');
 rl.prompt();
 
-let netEvents = ["connect", "send", "arkb", "arkbi", "p2se"];
+let netEvents = ["connect", "send", "arkbtsi", "arkb", "arkbi", "p2se"];
 let errTip = function(){
   console.log('没有找到命令！ 查看:help');
 }
@@ -29,7 +29,7 @@ rl.on('line', function(line) {
   if(splitted.length == 1){
     switch(splitted[0]){
       case 'help':
-        console.log('connect send arkb arkbi p2se')
+        console.log(netEvents)
         break;
       case 'connect':
         manage.Connect();
@@ -52,6 +52,9 @@ rl.on('line', function(line) {
           break;
       case 'send':
         manage.Send(Number(splitted[1]));
+        break;
+      case 'arkbtsi':
+        manage.ArkbroadcastToOthersInRoom(Number(splitted[1]))
         break;
       case 'arkb':
         manage.Arkbroadcast(Number(splitted[1]));

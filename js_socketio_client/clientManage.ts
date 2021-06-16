@@ -9,7 +9,7 @@ export class MyClientManage{
 
   public Connect(){
     let myClient = new MyClient();
-    myClient.Connect();
+    myClient.Connect(gconnectid);
     this.myClientsMap.set(gconnectid, myClient);
     gconnectid++;
   }
@@ -18,6 +18,13 @@ export class MyClientManage{
     let myClient = this.myClientsMap.get(connectid);
     if(myClient){
       myClient.Send();
+    }
+  }
+
+  public ArkbroadcastToOthersInRoom(connectid){
+    let myClient = this.myClientsMap.get(connectid);
+    if(myClient){
+      myClient.ArkbroadcastToOthersInRoom();
     }
   }
 
