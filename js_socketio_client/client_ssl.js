@@ -1,6 +1,6 @@
 const io = require('socket.io-client')
 const host = "https://127.0.0.1"
-const port =  3001;
+const port =  3002;
 console.log(io.connect)
 const options = {
   secure:true,
@@ -9,7 +9,7 @@ const options = {
   transportOptions: {
     polling: {
       extraHeaders: {
-        'Authorization1': 'chenqi1',
+        'Authorization': 'chenqi',
       },
     },
   }
@@ -19,9 +19,9 @@ const socket = io.connect(uri, options);
 console.log(uri)
 
 let last;
-function send () {
+function send (client) {
   last = new Date();
-  socket.emit('ping_from_client');
+  
 }
 
 socket.on('connect_error', (err) => {
@@ -46,8 +46,25 @@ socket.on('reconnect_failed', () => {
 
 socket.on('connect', () => {
   console.log(`connect ${socket.id}`);
- 
-  send();
+  socket.on('message',(data, data1)=>{
+    console.log(data, data1)
+  })
+
+  setTimeout(()=>{
+    socket.emit("P2S_EnterActivity", `{"actid":"100001"}`)
+  }, 5000)
+
+  socket.on('broadcast',(data)=>{
+    console.log(data)
+  })
+
+  socket.on('broadcastinroom',(data)=>{
+    console.log(data)
+  })
+
+  socket.on('S2P_EnterActivity', (data)=>{
+    console.log(data)
+  })
 });
 
 socket.on('disconnect', () => {
@@ -63,6 +80,4 @@ socket.on('pong_from_server', () => {
   setTimeout(send, 1000);
 });
 
-socket.on('message',(data)=>{
-  console.log(data)
-})
+
