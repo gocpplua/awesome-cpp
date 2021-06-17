@@ -55,11 +55,11 @@ export class MyClient{
           console.log(this.socket_.gid, data)
         })
       
-        socket.on('arkbroadcastinroom',(data)=>{
+        socket.on('arkbroadcasttoworld',(data)=>{
           console.log(this.socket_.gid, data)
         })
       
-        socket.on('arkbroadcasttoothersinroom',(data)=>{
+        socket.on('arkbroadcasttoothers',(data)=>{
           console.log(this.socket_.gid, data)
         })
 
@@ -86,15 +86,15 @@ export class MyClient{
       this.socket_.emit("message", `{"message":"message"}`)
     }
 
-    public ArkbroadcastToOthersInRoom(){
-      this.socket_.emit("arkbroadcasttoothersinroom", `{"arkbroadcasttoothersinroom":"arkbroadcasttoothersinroom"}`)
+    public ArkbroadcastToOthers(){
+      this.socket_.emit("arkbroadcasttoothers", `{"ArkbroadcastToOthers":"ArkbroadcastToOthers"}`)
     }
 
     public Arkbroadcast(){
       this.socket_.emit("arkbroadcast", `{"arkbroadcast":"arkbroadcast"}`)
     }
 
-    public ArkbroadcastInRoom(){
-      this.socket_.emit("arkbroadcastinroom", `{"arkbroadcastinroom":"arkbroadcastinroom"}`)
+    public ArkbroadcastToWorld(){
+      this.socket_.emit("arkbroadcasttoworld", `{"ArkbroadcastToWorld":"ArkbroadcastToWorld"}`)
     }
 }

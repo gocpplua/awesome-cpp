@@ -1,4 +1,4 @@
-import {MyClientManage} from './clientManage'
+import { MyClientManage } from './clientManage';
 let manage = new MyClientManage();
 var readline = require('readline');
 var  rl = readline.createInterface(process.stdin, process.stdout);
@@ -12,7 +12,7 @@ var  rl = readline.createInterface(process.stdin, process.stdout);
 rl.setPrompt('Test> ');
 rl.prompt();
 
-let netEvents = ["connect", "send", "arkbtsi", "arkb", "arkbi", "p2se"];
+let netEvents = ["connect", "send", "arkbto", "arkb", "arkbtw", "p2se"];
 let errTip = function(){
   console.log('没有找到命令！ 查看:help');
 }
@@ -53,14 +53,14 @@ rl.on('line', function(line) {
       case 'send':
         manage.Send(Number(splitted[1]));
         break;
-      case 'arkbtsi':
-        manage.ArkbroadcastToOthersInRoom(Number(splitted[1]))
+      case 'arkbto':
+        manage.ArkbroadcastToOthers(Number(splitted[1]))
         break;
       case 'arkb':
         manage.Arkbroadcast(Number(splitted[1]));
         break;
-      case 'arkbi':
-        manage.ArkbroadcastInRoom(Number(splitted[1]));
+      case 'arkbtw':
+        manage.ArkbroadcastToWorld(Number(splitted[1]));
         break;
       case 'p2se':
         manage.P2S_EnterActivity(Number(splitted[1]));

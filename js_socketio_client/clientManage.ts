@@ -21,10 +21,10 @@ export class MyClientManage{
     }
   }
 
-  public ArkbroadcastToOthersInRoom(connectid){
+  public ArkbroadcastToOthers(connectid){
     let myClient = this.myClientsMap.get(connectid);
     if(myClient){
-      myClient.ArkbroadcastToOthersInRoom();
+      myClient.ArkbroadcastToOthers();
     }
   }
 
@@ -35,10 +35,10 @@ export class MyClientManage{
     }
   }
 
-  public ArkbroadcastInRoom(connectid){
+  public ArkbroadcastToWorld(connectid){
     let myClient = this.myClientsMap.get(connectid);
     if(myClient){
-      myClient.ArkbroadcastInRoom();
+      myClient.ArkbroadcastToWorld();
     }
   }
 
