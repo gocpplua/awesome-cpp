@@ -63,7 +63,7 @@ export class MyClient{
           console.log(this.socket_.gid, data)
         })
 
-        socket.on('S2P_EnterActivity', (data)=>{
+        socket.on('S2P_SyncScene', (data)=>{
           console.log(this.socket_.gid, data)
           let jData = JSON.parse(data)
           console.log(jData)
