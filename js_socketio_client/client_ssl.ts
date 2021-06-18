@@ -64,21 +64,23 @@ export class MyClient{
         })
 
         socket.on('S2P_SyncScene', (data)=>{
-          console.log(this.socket_.gid, data)
+          console.log('S2P_SyncScene', this.socket_.gid)
           let jData = JSON.parse(data)
           let jActor = JSON.parse(jData.actor);
           console.log("=========jActor==========")
           for (const value of jActor) {
-            console.log(value)
             console.log(value.pos[0])
           }
           let jNpc = JSON.parse(jData.npc)
-          console.log(jNpc)
+
           let jPoi = JSON.parse(jData.poi)
           for (const value of jPoi) {
             console.log(value)
           }
+        })
 
+        socket.on('S2B_EnterPlay', (data) =>{
+          console.log('S2B_EnterPlay', this.socket_.gid, data);
         })
       });
       
@@ -94,6 +96,10 @@ export class MyClient{
 
     public P2S_EnterActivity(){
       this.socket_.emit("P2S_EnterActivity", `{"actId":"100001", "pos":[1,2,3]}`)
+    }
+
+    public P2S_LeaveActivity(){
+      this.socket_.emit("P2S_LeaveActivity", `{"actId":"100001"}`)
     }
 
     public Send(){

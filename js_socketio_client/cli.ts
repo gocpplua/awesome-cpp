@@ -12,7 +12,7 @@ var  rl = readline.createInterface(process.stdin, process.stdout);
 rl.setPrompt('Test> ');
 rl.prompt();
 
-let netEvents = ["connect", "send", "arkbto", "arkb", "arkbtw", "p2se"];
+let netEvents = ["connect", "send", "arkbto", "arkb", "arkbtw", "p2se", "p2sl"];
 let errTip = function(){
   console.log('没有找到命令！ 查看:help');
 }
@@ -64,6 +64,9 @@ rl.on('line', function(line) {
         break;
       case 'p2se':
         manage.P2S_EnterActivity(Number(splitted[1]));
+        break;
+      case 'p2sl':
+        manage.P2S_LeaveActivity(Number(splitted[1]));
         break;
       default:
         errTip();

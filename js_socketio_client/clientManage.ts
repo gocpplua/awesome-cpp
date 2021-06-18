@@ -48,4 +48,11 @@ export class MyClientManage{
       myClient.P2S_EnterActivity();
     }
   }
+
+  public P2S_LeaveActivity(connectid){
+    let myClient = this.myClientsMap.get(connectid);
+    if(myClient){
+      myClient.P2S_LeaveActivity();
+    }
+  }
 }
