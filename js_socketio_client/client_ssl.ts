@@ -65,6 +65,17 @@ export class MyClient{
 
         socket.on('S2P_EnterActivity', (data)=>{
           console.log(this.socket_.gid, data)
+          let jData = JSON.parse(data)
+          console.log(jData)
+
+          let jActor = JSON.parse(jData.actor);
+          console.log(jActor)
+          let jNpc = JSON.parse(jData.npc)
+          console.log(jNpc)
+          let jPoi = JSON.parse(jData.poi)
+          for (const value of jPoi) {
+            console.log(value)
+          }
         })
       });
       
