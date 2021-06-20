@@ -79,8 +79,16 @@ export class MyClient{
           }
         })
 
+        socket.on('S2P_LeaveScene', (data) =>{
+          console.log('S2P_LeaveScene', this.socket_.gid, data);
+        })
+
         socket.on('S2B_EnterPlay', (data) =>{
           console.log('S2B_EnterPlay', this.socket_.gid, data);
+        })
+
+        socket.on('S2B_LeavePlay', (data) =>{
+          console.log('S2B_LeavePlay', this.socket_.gid, data);
         })
       });
       
