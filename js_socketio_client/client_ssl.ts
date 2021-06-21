@@ -72,6 +72,10 @@ export class MyClient{
           console.log(this.socket_.gid, data)
         })
 
+        socket.on('S2P_EnterActivity',(data)=>{
+          console.log(this.socket_.gid, data)
+        })
+
         socket.on('S2P_SyncScene', (data)=>{
           console.log('S2P_SyncScene', this.socket_.gid)
           let jData = JSON.parse(data)
@@ -82,14 +86,11 @@ export class MyClient{
               SetActorEngineId(value.engineId)
               console.log('oneActorEngineId', GetActorEngineId())
             }
-            console.log("pos[0]", value.pos[0], " engined:",value.engineId)
+            console.log(" engined:",value.engineId)
           }
           let jNpc = JSON.parse(jData.npc)
 
           let jPoi = JSON.parse(jData.poi)
-          for (const value of jPoi) {
-            console.log(value)
-          }
         })
 
         socket.on('S2B_HitActor', (data)=>{

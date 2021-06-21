@@ -12,7 +12,8 @@ var  rl = readline.createInterface(process.stdin, process.stdout);
 rl.setPrompt('Test> ');
 rl.prompt();
 
-let netEvents = ["connect", "send", "arkbto", "arkb", "arkbtw", "p2se", "p2sl", "p2sh", "p2sf"];
+let netEvents = ["connect", "p2se", "p2sl", "p2sh", "p2sf"];
+//let netEvents = ["connect", "send", "arkbto", "arkb", "arkbtw", "p2se", "p2sl", "p2sh", "p2sf"];
 let errTip = function(){
   console.log('没有找到命令！ 查看:help');
 }
@@ -23,7 +24,7 @@ rl.on('line', function(line) {
   let splitted = line.split(" ", 2);
   if(splitted.length > 0){
     const index = netEvents.findIndex(event => event === splitted[0]);
-    if(index >= 0) delay = 500;
+    if(index >= 0) delay = 300;
   }
 
   if(splitted.length == 1){
