@@ -55,4 +55,18 @@ export class MyClientManage{
       myClient.P2S_LeaveActivity();
     }
   }
+
+  public P2S_HitActor(connectid){
+    let myClient = this.myClientsMap.get(connectid);
+    if(myClient){
+      myClient.P2S_HitActor();
+    }
+  }
+
+  public P2S_FireBullet(connectid){
+    let myClient = this.myClientsMap.get(connectid);
+    if(myClient){
+      myClient.P2S_FireBullet();
+    }
+  }
 }

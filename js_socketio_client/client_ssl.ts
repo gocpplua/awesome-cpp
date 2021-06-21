@@ -14,8 +14,17 @@ let options = {
   }
 };
 let uri = `${host}:${port}?token=abc`
+let oneActorEngineId = null; // 进入场景后，随机记录一个actor的enginedId
+function GetActorEngineId(){
+  return oneActorEngineId;
+}
+
+function SetActorEngineId(id){
+  oneActorEngineId = id
+}
 export class MyClient{
   socket_:any;
+  
   public Connect(id){
       let socket = io.connect(uri, options);
 
@@ -69,7 +78,11 @@ export class MyClient{
           let jActor = JSON.parse(jData.actor);
           console.log("=========jActor==========")
           for (const value of jActor) {
-            console.log(value.pos[0])
+            if(!GetActorEngineId()){
+              SetActorEngineId(value.engineId)
+              console.log('oneActorEngineId', GetActorEngineId())
+            }
+            console.log("pos[0]", value.pos[0], " engined:",value.engineId)
           }
           let jNpc = JSON.parse(jData.npc)
 
@@ -77,6 +90,25 @@ export class MyClient{
           for (const value of jPoi) {
             console.log(value)
           }
+        })
+
+        socket.on('S2B_HitActor', (data)=>{
+          console.log('S2B_HitActor', this.socket_.gid)
+          let jData = JSON.parse(data)
+          console.log(jData)
+        })
+
+        socket.on('S2B_FireBullet', (data)=>{
+          console.log('S2B_FireBullet', this.socket_.gid)
+          let jData = JSON.parse(data)
+          console.log(jData)
+        })
+
+        socket.on('S2B_SyncActor', (data)=>{
+          console.log('S2B_SyncActor', this.socket_.gid)
+          let jData = JSON.parse(data)
+          console.log(jData)
+          SetActorEngineId(jData.engineId)
         })
 
         socket.on('S2P_LeaveScene', (data) =>{
@@ -108,6 +140,15 @@ export class MyClient{
 
     public P2S_LeaveActivity(){
       this.socket_.emit("P2S_LeaveActivity", `{"actId":"100001"}`)
+    }
+
+    public P2S_HitActor(){
+      console.log('hit actor:', oneActorEngineId)
+      this.socket_.emit("P2S_HitActor", `{"engineId":"${oneActorEngineId}"}`)
+    }
+
+    public P2S_FireBullet(){
+      this.socket_.emit("P2S_FireBullet", `{"pos":[1,2,3], "towards":[10,20,30]}`)
     }
 
     public Send(){
