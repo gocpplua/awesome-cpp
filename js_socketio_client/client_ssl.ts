@@ -123,6 +123,10 @@ export class MyClient{
         socket.on('S2B_LeavePlay', (data) =>{
           console.log('S2B_LeavePlay', this.socket_.gid, data);
         })
+
+        socket.on('S2P_TEST',(data)=>{
+          console.log(this.socket_.gid, data)
+        })
       });
       
       socket.on('disconnect', () => {
@@ -166,5 +170,9 @@ export class MyClient{
 
     public ArkbroadcastToWorld(){
       this.socket_.emit("arkbroadcasttoworld", `{"ArkbroadcastToWorld":"ArkbroadcastToWorld"}`)
+    }
+
+    public TEST_RoomInfo(){
+      this.socket_.emit("TEST_RoomInfo")
     }
 }

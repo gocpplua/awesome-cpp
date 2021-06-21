@@ -69,4 +69,13 @@ export class MyClientManage{
       myClient.P2S_FireBullet();
     }
   }
+
+  public TEST_RoomInfo(connectid){
+    let myClient = this.myClientsMap.get(connectid);
+    if(myClient){
+      myClient.TEST_RoomInfo();
+    }
+  }
+
+  
 }

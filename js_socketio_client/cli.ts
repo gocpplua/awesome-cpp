@@ -12,7 +12,7 @@ var  rl = readline.createInterface(process.stdin, process.stdout);
 rl.setPrompt('Test> ');
 rl.prompt();
 
-let netEvents = ["connect", "p2se", "p2sl", "p2sh", "p2sf"];
+let netEvents = ["connect", "p2se", "p2sl", "p2sh", "p2sf", "troominfo"];
 //let netEvents = ["connect", "send", "arkbto", "arkb", "arkbtw", "p2se", "p2sl", "p2sh", "p2sf"];
 let errTip = function(){
   console.log('没有找到命令！ 查看:help');
@@ -71,10 +71,13 @@ rl.on('line', function(line) {
         break;
       case 'p2sh':
         manage.P2S_HitActor(Number(splitted[1]));
-        break
+        break;
       case 'p2sf':
         manage.P2S_FireBullet(Number(splitted[1]));
-        break
+        break;
+      case 'troominfo':
+        manage.TEST_RoomInfo(Number(splitted[1]))
+        break;
       default:
         errTip();
         break;
