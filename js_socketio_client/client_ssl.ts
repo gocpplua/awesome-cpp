@@ -58,7 +58,8 @@ export class MyClient{
       
         setInterval(()=>{
           socket.emit("ping")
-        }, 10000)
+          console.log("ping")
+        }, 20000)
         
 
         socket.on('S2P_SyncPlayer',(data)=>{
