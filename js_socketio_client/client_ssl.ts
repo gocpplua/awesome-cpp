@@ -59,7 +59,12 @@ export class MyClient{
         setInterval(()=>{
           socket.emit("ping")
         }, 10000)
-      
+        
+
+        socket.on('S2P_SyncPlayer',(data)=>{
+          console.log('S2P_SyncPlayer', this.socket_.gid, data)
+        })
+
         socket.on('arkbroadcast',(data)=>{
           console.log(this.socket_.gid, data)
         })
@@ -116,25 +121,33 @@ export class MyClient{
           console.log('S2P_LeaveScene', this.socket_.gid, data);
         })
 
-        socket.on('S2B_EnterPlay', (data) =>{
-          console.log('S2B_EnterPlay', this.socket_.gid, data);
+        socket.on('S2P_LeaveActivity', (data) =>{
+          console.log('S2P_LeaveActivity', this.socket_.gid, data);
+        })
+
+        socket.on('S2B_SyncPlayer', (data) =>{
+          console.log('S2B_SyncPlayer', this.socket_.gid, data);
         })
 
         socket.on('S2B_LeavePlay', (data) =>{
           console.log('S2B_LeavePlay', this.socket_.gid, data);
         })
 
+        socket.on('S2B_KillOffPlayer', (data) =>{
+          console.log('S2B_KillOffPlayer', this.socket_.gid, data);
+        })
+
         socket.on('S2P_TEST',(data)=>{
-          console.log(this.socket_.gid, data)
+          console.log('S2P_TEST', this.socket_.gid, data)
         })
       });
       
       socket.on('disconnect', () => {
-        console.log(`disconnect ${socket.id}`);
+        console.log(`disconnect ${this.socket_.gid}`);
       });
       
       socket.on('error', () =>{
-        console.log(`error ${socket.id}`);
+        console.log(`error ${this.socket_.gid}`);
       })
       return socket;
     }
