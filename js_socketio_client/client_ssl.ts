@@ -96,7 +96,7 @@ export class MyClient{
           }
           let jNpc = JSON.parse(jData.npc)
 
-          let jPoi = JSON.parse(jData.poi)
+          let jPoi = JSON.parse(jData.resource)
         })
 
         socket.on('S2B_HitActor', (data)=>{
