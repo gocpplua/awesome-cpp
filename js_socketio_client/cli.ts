@@ -12,8 +12,8 @@ var  rl = readline.createInterface(process.stdin, process.stdout);
 rl.setPrompt('Test> ');
 rl.prompt();
 
-let netEvents = ["connect", "p2se", "p2sl", "p2ss","p2sh", "p2sf", "troominfo"];
-//let netEvents = ["connect", "send", "arkbto", "arkb", "arkbtw", "p2se", "p2sl", "p2sh", "p2sf"];
+let netEvents = ["connect", "p2se", "p2sl", "p2ss","p2sd", "p2sf", "troominfo"];
+//let netEvents = ["connect", "send", "arkbto", "arkb", "arkbtw", "p2se", "p2sl", "p2sd", "p2sf"];
 let errTip = function(){
   console.log('没有找到命令！ 查看:help');
 }
@@ -72,8 +72,8 @@ rl.on('line', function(line) {
       case 'p2ss':
         manage.P2S_SyncScene(Number(splitted[1]));
         break;
-      case 'p2sh':
-        manage.P2S_HitActor(Number(splitted[1]));
+      case 'p2sd':
+        manage.P2S_ActorDie(Number(splitted[1]));
         break;
       case 'p2sf':
         manage.P2S_FireBullet(Number(splitted[1]));

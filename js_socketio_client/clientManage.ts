@@ -63,10 +63,10 @@ export class MyClientManage{
     }
   }
 
-  public P2S_HitActor(connectid){
+  public P2S_ActorDie(connectid){
     let myClient = this.myClientsMap.get(connectid);
     if(myClient){
-      myClient.P2S_HitActor();
+      myClient.P2S_ActorDie();
     }
   }
 

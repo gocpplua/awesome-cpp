@@ -99,8 +99,8 @@ export class MyClient{
           let jPoi = jData.resource
         })
 
-        socket.on('S2B_HitActor', (data)=>{
-          console.log('S2B_HitActor', this.socket_.gid)
+        socket.on('S2B_ActorDie', (data)=>{
+          console.log('S2B_ActorDie', this.socket_.gid)
           let jData = JSON.parse(data)
           console.log(jData)
         })
@@ -169,9 +169,10 @@ export class MyClient{
       this.socket_.emit("P2S_SyncScene", `{"actId":"100001"}`)
     }
 
-    public P2S_HitActor(){
-      console.log('hit actor:', oneActorEngineId)
-      this.socket_.emit("P2S_HitActor", `{"engineId":"${oneActorEngineId}"}`)
+    public P2S_ActorDie(){
+      console.log('actor die:', oneActorEngineId)
+      this.socket_.emit("P2S_ActorDie", `{"engineId":"${oneActorEngineId}"}`)
+      SetActorEngineId(null)
     }
 
     public P2S_FireBullet(){
