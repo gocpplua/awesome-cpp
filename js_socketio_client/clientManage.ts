@@ -56,6 +56,13 @@ export class MyClientManage{
     }
   }
 
+  public P2S_SyncScene(connectid){
+    let myClient = this.myClientsMap.get(connectid);
+    if(myClient){
+      myClient.P2S_SyncScene();
+    }
+  }
+
   public P2S_HitActor(connectid){
     let myClient = this.myClientsMap.get(connectid);
     if(myClient){

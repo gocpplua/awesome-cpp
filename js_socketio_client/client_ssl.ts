@@ -85,7 +85,7 @@ export class MyClient{
         socket.on('S2P_SyncScene', (data)=>{
           console.log('S2P_SyncScene', this.socket_.gid)
           let jData = JSON.parse(data)
-          let jActor = JSON.parse(jData.actor);
+          let jActor = jData.actor;
           console.log("=========jActor==========")
           for (const value of jActor) {
             if(!GetActorEngineId()){
@@ -94,9 +94,9 @@ export class MyClient{
             }
             console.log(" engined:",value.engineId)
           }
-          let jNpc = JSON.parse(jData.npc)
+          let jNpc = jData.npc
 
-          let jPoi = JSON.parse(jData.resource)
+          let jPoi = jData.resource
         })
 
         socket.on('S2B_HitActor', (data)=>{
@@ -112,10 +112,14 @@ export class MyClient{
         })
 
         socket.on('S2B_SyncActor', (data)=>{
-          console.log('S2B_SyncActor', this.socket_.gid)
           let jData = JSON.parse(data)
-          console.log(jData)
-          SetActorEngineId(jData.engineId)
+          console.log('S2B_SyncActor', this.socket_.gid, jData.length)
+          for (const value of jData) {
+            if(!GetActorEngineId()){
+              SetActorEngineId(value.engineId)
+              console.log('oneActorEngineId', GetActorEngineId())
+            }
+          }
         })
 
         socket.on('S2P_LeaveScene', (data) =>{
@@ -159,6 +163,10 @@ export class MyClient{
 
     public P2S_LeaveActivity(){
       this.socket_.emit("P2S_LeaveActivity", `{"actId":"100001"}`)
+    }
+
+    public P2S_SyncScene(){
+      this.socket_.emit("P2S_SyncScene", `{"actId":"100001"}`)
     }
 
     public P2S_HitActor(){
