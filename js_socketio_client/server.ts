@@ -11,7 +11,13 @@ io.set('authorization', function (handshake, callback) {
 });
 
 io.of('/nss').on('connection', function (socket) {
-    console.log('connection')
+  console.log('connection')
+
+  socket.use((packet, next)=>{
+      console.log('packet', packet);
+      next();
+  });
+
   socket.on('ferret', function (data, fn) {
     console.log(Date.now(), data)
     fn('s2c ack ferret');

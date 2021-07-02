@@ -24,8 +24,11 @@ socket.on('connect', () => {
     fn('c2s ack ferret')
   });
 
-  socket.emit('ferret', 'c2s message', function (data) {
-    console.log(Date.now(), data); // data will be 'woot'
-  });
+  setTimeout(()=>{
+    socket.emit('ferret', 'c2s message', function (data) {
+      console.log('ferret', Date.now(), data); // data will be 'woot'
+    });
+  }, 1000)
+
 });
 
