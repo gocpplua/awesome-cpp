@@ -1,10 +1,8 @@
 const io = require('socket.io-client')
 const port =  4444;
 
-const socket = io.connect('http://127.0.0.1:' + port, {
-  path: '/test'  
-});
-console.log(`connect http://127.0.0.1:${port}`)
+const socket = io.connect(`http://127.0.0.1:${port}/nss`);
+console.log(`connect http://127.0.0.1:${port}/nss`)
 
 socket.on('connect', () => {
   console.log(`connect ${socket.id}`);

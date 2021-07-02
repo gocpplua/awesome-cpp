@@ -1,8 +1,7 @@
-var io = require('socket.io')(4444, {
-    path: '/test',
-});
+var io = require('socket.io')(4444);
 
-io.on('connection', function (socket) {
+io.of('/nss').on('connection', function (socket) {
+    console.log('connection')
   socket.on('ferret', function (data, fn) {
     console.log(Date.now(), data)
     fn('s2c ack ferret');
