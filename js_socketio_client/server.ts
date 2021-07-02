@@ -1,4 +1,6 @@
-var io = require('socket.io')(4444);
+var io = require('socket.io')(4444, {
+    path: '/test',
+});
 
 io.on('connection', function (socket) {
   socket.on('ferret', function (data, fn) {
