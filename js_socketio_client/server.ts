@@ -1,4 +1,6 @@
-var io = require('socket.io')(4444);
+var io = require('socket.io')(4444,{
+    path: '/aaa'
+});
 
 io.of('/nss').on('connection', function (socket) {
     console.log('connection')

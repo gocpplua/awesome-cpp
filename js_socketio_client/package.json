@@ -2,6 +2,7 @@
   "name": "socketio-examples",
   "version": "0.0.1",
   "dependencies": {
+    "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
     "ts-node": "^10.0.0"
   },
