@@ -1,9 +1,18 @@
 const io = require('socket.io-client')
 const port =  4444;
-
-const socket = io.connect(`http://127.0.0.1:${port}/nss`, {
-  path: '/aaa'
-});
+const options = {
+  path: '/aaa',
+  secure:true,
+  rejectUnauthorized : false,
+  transportOptions: {
+    polling: {
+      extraHeaders: {
+        authorization: 'chenqi',
+      },
+    },
+  }
+  };
+const socket = io.connect(`http://127.0.0.1:${port}/nss`, options);
 console.log(`connect http://127.0.0.1:${port}/nss`)
 
 socket.on('connect', () => {
