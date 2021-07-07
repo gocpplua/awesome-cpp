@@ -1,6 +1,6 @@
 let io = require('socket.io-client')
 let host = "https://127.0.0.1"
-let port =  3002;
+let port =  4002;
 let options = {
   secure:true,
   //reconnect: true,
@@ -58,7 +58,6 @@ export class MyClient{
       
         setInterval(()=>{
           socket.emit("ping")
-          console.log("ping")
         }, 20000)
         
 
@@ -86,13 +85,11 @@ export class MyClient{
           console.log('S2P_SyncScene', this.socket_.gid)
           let jData = JSON.parse(data)
           let jActor = jData.actor;
-          console.log("=========jActor==========")
           for (const value of jActor) {
             if(!GetActorEngineId()){
               SetActorEngineId(value.engineId)
               console.log('oneActorEngineId', GetActorEngineId())
             }
-            console.log(" engined:",value.engineId)
           }
           let jNpc = jData.npc
 
