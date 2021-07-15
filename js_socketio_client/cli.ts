@@ -12,7 +12,7 @@ var  rl = readline.createInterface(process.stdin, process.stdout);
 rl.setPrompt('Test> ');
 rl.prompt();
 
-let netEvents = ["connect", "p2se", "p2sl", "p2ss","p2sd", "p2sf", "troominfo"];
+let netEvents = ["connect", "p2se", "p2sl", "p2ss","p2sd", "p2sf", "troominfo", "tsaveplayer"];
 //let netEvents = ["connect", "send", "arkbto", "arkb", "arkbtw", "p2se", "p2sl", "p2sd", "p2sf"];
 let errTip = function(){
   console.log('没有找到命令！ 查看:help');
@@ -80,6 +80,9 @@ rl.on('line', function(line) {
         break;
       case 'troominfo':
         manage.TEST_RoomInfo(Number(splitted[1]))
+        break;
+      case 'tsaveplayer':
+        manage.TEST_SavePlayer(Number(splitted[1]))
         break;
       default:
         errTip();

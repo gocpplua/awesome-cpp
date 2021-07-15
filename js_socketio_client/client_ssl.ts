@@ -97,9 +97,9 @@ export class MyClient{
         })
 
         socket.on('S2B_ActorDie', (data)=>{
-          console.log('S2B_ActorDie', this.socket_.gid)
+          //console.log('S2B_ActorDie', this.socket_.gid)
           let jData = JSON.parse(data)
-          console.log(jData)
+          //console.log(jData)
         })
 
         socket.on('S2B_FireBullet', (data)=>{
@@ -110,7 +110,7 @@ export class MyClient{
 
         socket.on('S2B_SyncActor', (data)=>{
           let jData = JSON.parse(data)
-          console.log('S2B_SyncActor', this.socket_.gid, jData.length)
+          //console.log('S2B_SyncActor', this.socket_.gid, jData.length)
           for (const value of jData) {
             if(!GetActorEngineId()){
               SetActorEngineId(value.engineId)
@@ -128,7 +128,7 @@ export class MyClient{
         })
 
         socket.on('S2B_SyncPlayer', (data) =>{
-          console.log('S2B_SyncPlayer', this.socket_.gid, data);
+          //console.log('S2B_SyncPlayer', this.socket_.gid, data);
         })
 
         socket.on('S2B_LeavePlay', (data) =>{
@@ -194,5 +194,9 @@ export class MyClient{
 
     public TEST_RoomInfo(){
       this.socket_.emit("TEST_RoomInfo")
+    }
+
+    public TEST_SavePlayer(){
+      this.socket_.emit("TEST_SavePlayer")
     }
 }

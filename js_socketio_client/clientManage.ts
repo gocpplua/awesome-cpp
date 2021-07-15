@@ -84,5 +84,10 @@ export class MyClientManage{
     }
   }
 
-  
+  public TEST_SavePlayer(connectid){
+    let myClient = this.myClientsMap.get(connectid);
+    if(myClient){
+      myClient.TEST_SavePlayer();
+    }
+  }
 }
