@@ -32,6 +32,23 @@ int main()
     cout << "push_back:" << endl;
     std::vector<testDemo> demo2;
     demo2.push_back(2);
+
+    // remove() 的实现原理是，在遍历容器中的元素时，一旦遇到目标元素，就做上标记，然后继续遍历，直到找到一个非目标元素，
+    // 即用此元素将最先做标记的位置覆盖掉，同时将此非目标元素所在的位置也做上标记，等待找到新的非目标元素将其覆盖。
+    // 因此，如果将程序中 demo 容器的元素全部输出，得到的结果为 1 4 5 4 3 5。
+    vector<int>demo{ 1,3,3,4,3,5 };
+    //交换要删除元素和最后一个元素的位置
+    auto iter = std::remove(demo.begin(), demo.end(), 3);
+
+    cout << "size is :" << demo.size() << endl;
+    cout << "capacity is :" << demo.capacity() << endl;
+    //输出剩余的元素
+    for (auto first = demo.begin(); first < iter; ++first) {
+        cout << *first << " "; // output: 1 4 5
+    }
+    cout << endl;
+    for (int i = 0; i < 6; i++)
+        cout << demo[i] << " "; // output: 1 4 5 4 3 5
     return 0;
 }
 
