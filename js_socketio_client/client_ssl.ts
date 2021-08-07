@@ -77,7 +77,7 @@ export class MyClient{
           console.log(this.socket_.gid, data)
         })
 
-        socket.on('S2P_EnterActivity',(data)=>{
+        socket.on('S2P_EnterExperience',(data)=>{
           console.log(this.socket_.gid, data)
         })
 
@@ -97,7 +97,7 @@ export class MyClient{
         })
 
         socket.on('S2B_ActorDie', (data)=>{
-          //console.log('S2B_ActorDie', this.socket_.gid)
+          console.log('S2B_ActorDie', this.socket_.gid)
           let jData = JSON.parse(data)
           //console.log(jData)
         })
@@ -110,7 +110,7 @@ export class MyClient{
 
         socket.on('S2B_SyncActor', (data)=>{
           let jData = JSON.parse(data)
-          //console.log('S2B_SyncActor', this.socket_.gid, jData.length)
+          console.log('S2B_SyncActor', this.socket_.gid, jData.length)
           for (const value of jData) {
             if(!GetActorEngineId()){
               SetActorEngineId(value.engineId)
@@ -123,12 +123,12 @@ export class MyClient{
           console.log('S2P_LeaveScene', this.socket_.gid, data);
         })
 
-        socket.on('S2P_LeaveActivity', (data) =>{
-          console.log('S2P_LeaveActivity', this.socket_.gid, data);
+        socket.on('S2P_LeaveExperience', (data) =>{
+          console.log('S2P_LeaveExperience', this.socket_.gid, data);
         })
 
         socket.on('S2B_SyncPlayer', (data) =>{
-          //console.log('S2B_SyncPlayer', this.socket_.gid, data);
+          console.log('S2B_SyncPlayer', this.socket_.gid, data);
         })
 
         socket.on('S2B_LeavePlay', (data) =>{
@@ -155,11 +155,11 @@ export class MyClient{
     }
 
     public P2S_EnterActivity(){
-      this.socket_.emit("P2S_EnterActivity", `{"actId":"100001", "pos":[1,2,3]}`)
+      this.socket_.emit("P2S_EnterExperience", `{"experienceId":"100001", "pos":[1,2,3]}`)
     }
 
     public P2S_LeaveActivity(){
-      this.socket_.emit("P2S_LeaveActivity", `{"actId":"100001"}`)
+      this.socket_.emit("P2S_LeaveExperience", `{"experienceId":"100001"}`)
     }
 
     public P2S_SyncScene(){
