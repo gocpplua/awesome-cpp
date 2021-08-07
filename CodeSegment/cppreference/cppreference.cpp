@@ -6,7 +6,9 @@
 #include "system.h"
 #include <map>
 #include<string>
-
+#include "tarray.h"
+#include<vector>
+#include"moveconstructor.h"
 bool CompHourKeyDesc(const std::pair<std::string, std::string>& x, const std::pair<std::string, std::string>& y)
 {
     return  atoi(x.first.c_str()) > atoi(y.first.c_str());
@@ -16,10 +18,21 @@ int main()
     std::map<std::string, std::string> ret;
     ret["1"] = "1";
     ret["2"] = "2";
-    std::qsort(ret.begin(), ret.end(), CompHourKeyDesc);
+    // std::qsort(ret.begin(), ret.end(), CompHourKeyDesc);
     std::cout << "start main" << std::endl;
     //test_and_ed();
     t_system();
+
+    tarray();
+
+    cout << "emplace_back:" << endl;
+    std::vector<testDemo> demo1;
+    demo1.emplace_back(2);
+
+    cout << "push_back:" << endl;
+    std::vector<testDemo> demo2;
+    demo2.push_back(2);
+    return 0;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
