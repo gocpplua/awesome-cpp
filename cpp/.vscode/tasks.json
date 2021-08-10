@@ -3,14 +3,14 @@
 	"tasks": [
 		{
 			"type": "cppbuild",
-			"label": "C/C++: cpp build active file",
-			"command": "/usr/bin/cpp",
+			"label": "C/C++: g++ build active file",
+			"command": "/usr/bin/g++",
 			"args": [
 				"-g",
 				"-std=c++11",
 				"${file}",
 				"-o",
-				"${fileDirname}/out/${fileBasenameNoExtension}"
+				"${fileDirname}/../out/${fileBasenameNoExtension}"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
@@ -22,7 +22,7 @@
 				"kind": "build",
 				"isDefault": true
 			},
-			"detail": "compiler: /usr/bin/cpp"
+			"detail": "compiler: /usr/bin/g++"
 		}
 	]
 }
