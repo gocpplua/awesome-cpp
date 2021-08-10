@@ -1,0 +1,28 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: cpp build active file",
+			"command": "/usr/bin/cpp",
+			"args": [
+				"-g",
+				"-std=c++11",
+				"${file}",
+				"-o",
+				"${fileDirname}/out/${fileBasenameNoExtension}"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: /usr/bin/cpp"
+		}
+	]
+}
