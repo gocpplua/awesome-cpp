@@ -10,7 +10,72 @@
 - 几乎不用配置，它是一个单头文件的测试框架，压根不要什么额外的配置就可以使用
 - 语法非常简单明了，用它写的测试代码和自然语言一样易懂。
 
-### 如何使用 Catch
+### [如何使用 Catch2]
+我们使用v2版本，只要下载源码，切换分支到2.x版本，然后将文件"catch.hpp("Catch2/single_include/catch2/catch.hpp)拷贝到我的项目中。
+
+树行结构如下:
+```
+.
+├── 3thParty
+│   └── catch2
+│       └── catch.hpp
+├── doc
+│   └── unit-test.md
+├── readme.md
+├── src
+└── tests
+    └── test_demo.cpp
+```
+
+test_demo.cpp 用于单元测试，如下:
+```
+#define CATCH_CONFIG_MAIN
+#include "../3thParty/catch2/catch.hpp"
+
+
+static int Factorial( int number ) {
+   return number <= 1 ? number : Factorial( number - 1 ) * number;
+}
+
+TEST_CASE( "Factorial of 0 is 1 (fail)", "[single-file]" ) {
+    REQUIRE( Factorial(0) == 0 );
+    REQUIRE( Factorial(0) == 2 );
+}
+```
+
+然后在 tests 文件夹路径下执行:
+```
+cpp/tests$ g++ -std=c++11 -Wall -o test_demo test_demo.cpp && ./test_demo --success
+```
+
+运行结果如下:
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+test_demo is a Catch v2.9.2 host application.
+Run with -? for options
+
+-------------------------------------------------------------------------------
+Factorial of 0 is 1 (fail)
+-------------------------------------------------------------------------------
+test_demo.cpp:10
+...............................................................................
+
+test_demo.cpp:11: PASSED:
+  REQUIRE( Factorial(0) == 0 )
+with expansion:
+  0 == 0
+
+test_demo.cpp:12: FAILED:
+  REQUIRE( Factorial(0) == 2 )
+with expansion:
+  0 == 2
+
+===============================================================================
+test cases: 1 | 1 failed
+assertions: 2 | 1 passed | 1 failed
+```
+
+
 
 
 ### 常见问题:
@@ -22,7 +87,17 @@
 >
 > To get the default main, link against Catch2::Catch2WithMain target.
 
+2. 迁移问题
+
+[要迁移到 v3](https://github.com/catchorg/Catch2/blob/devel/docs/migrate-v2-to-v3.md#top),有两种基本方法可以这样做。
+- 使用catch_amalgamated.hpp和catch_amalgamated.cpp。
+- 将 Catch2 构建为适当的（静态）库，并移至分段标题
+
+如果使用第1种手段，下载联 [amalgamated header](https://github.com/catchorg/Catch2/blob/devel/extras/catch_amalgamated.hpp) 和[amalgamated sources](https://github.com/catchorg/Catch2/blob/devel/extras/catch_amalgamated.cpp)从extras，拖放到你的测试项目，并改写你从包括 <catch2/catch.hpp>到"catch_amalgamated.hpp"（或类似的东西，根据你如何设置你的路径）。
+
+
 ----
 
 参考文章:
 - [C++ 的单元测试工具 —— Catch](http://blog.guorongfei.com/2016/08/22/cpp-unit-test-catch/)
+- [Tutorial](https://github.com/catchorg/Catch2/blob/devel/docs/tutorial.md#top)
