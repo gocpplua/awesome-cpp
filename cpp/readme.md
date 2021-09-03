@@ -23,6 +23,11 @@
 └── unit-test.md // 单元测试 Catch2 的使用
 ```
 
+## 单元测试
+```
+cd tests && mkdir -p build && cd build && cmake .. && make && ./out/test_demo --success
+```
+
 
 
 
