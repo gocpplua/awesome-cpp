@@ -1,7 +1,9 @@
+// g++ -std=c++11 demo.cpp -o ../out/demo
 #include <iostream>
 #include <map>
 #include <unordered_map>
 #include "./util/instance.h"
+#include "../3thParty/icecream-cpp/icecream.hpp"
 class test{
   public:
     void print(){
@@ -28,4 +30,5 @@ int main(){
   std::cout << Singleton<test>::getInstance() << std::endl;
   std::cout << Singleton<test>::getInstance() << std::endl;
   std::cout << Singleton<test1>::getInstance() << std::endl;
+  IC();
 }
