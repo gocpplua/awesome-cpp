@@ -7,9 +7,15 @@ enable_testing()
 set(CMAKE_CXX_FLAGS
   "${CMAKE_CXX_FLAGS} -std=c++11")
 
+find_package(yaml-cpp REQUIRED)
+
+include_directories(${PROJECT_SOURCE_DIR}/)
 
 add_executable(UnitTest main.cpp) 
 add_executable(test_demo test_demo.cpp)
+
+add_executable(test_yaml ./test_yaml/test_yaml.cpp)
+target_link_libraries(test_yaml yaml-cpp)
 
 set(EXECUTABLE_OUTPUT_PATH ./out) # cmake可执行文件的存放路径
 

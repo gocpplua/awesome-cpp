@@ -1,0 +1,10 @@
+http_server:
+  thread_num: 2
+  ports: [8095, 8096]
+  restful_api: ["TestGet1", "TestPost2"]
+tcp_server:
+  addr: 0.0.0.0:8095
+  thread_num: 3
+web_socket:
+  port: 9002
+  timeout: 180
