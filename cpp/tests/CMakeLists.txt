@@ -5,13 +5,15 @@ project(UnitTest VERSION 0.1.0) # 设置工程名称 和版本
 include(CTest)
 enable_testing()
 set(CMAKE_CXX_FLAGS
-  "${CMAKE_CXX_FLAGS} -std=c++11")
+  "${CMAKE_CXX_FLAGS} -std=c++11 -rdynamic -Wall -Wextra -Wpedantic")
 
 find_package(yaml-cpp REQUIRED)
 
 include_directories(${PROJECT_SOURCE_DIR}/)
 
 add_executable(UnitTest main.cpp) 
+target_link_libraries(UnitTest yaml-cpp)
+
 add_executable(test_demo test_demo.cpp)
 
 add_executable(test_yaml ./test_yaml/test_yaml.cpp)
