@@ -7,12 +7,16 @@ enable_testing()
 set(CMAKE_CXX_FLAGS
   "${CMAKE_CXX_FLAGS} -std=c++11 -rdynamic -Wall -Wextra -Wpedantic")
 
+set(CMAKE_BUILD_TYPE "Release")
+
 find_package(yaml-cpp REQUIRED)
+MESSAGE(STATUS "yaml_INCLUDE_DIR: ${YAML_CPP_INCLUDE_DIR}")
+MESSAGE(STATUS "yaml_libraries: ${YAML_CPP_LIBRARIES}")
 
 include_directories(${PROJECT_SOURCE_DIR}/)
 
-add_executable(UnitTest main.cpp) 
-target_link_libraries(UnitTest yaml-cpp)
+add_executable(main main.cpp) 
+target_link_libraries(main yaml-cpp)
 
 add_executable(test_demo test_demo.cpp)
 
