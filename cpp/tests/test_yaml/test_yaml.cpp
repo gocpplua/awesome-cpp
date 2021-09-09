@@ -7,7 +7,7 @@ YAML::BadConversion::~BadConversion()
 {
 }
 
-void  YAML::detail::node_data::convert_to_map(const shared_memory_holder& pMemory)
+void  YAML::detail::node_data::convert_to_map(shared_memory_holder pMemory)
 {
 }
 
