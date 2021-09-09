@@ -23,6 +23,9 @@ add_executable(test_demo test_demo.cpp)
 add_executable(test_yaml ./test_yaml/test_yaml.cpp)
 target_link_libraries(test_yaml yaml-cpp)
 
+add_executable(test_evpp ./test_evpp/test_evpp.cpp)
+target_link_libraries(test_evpp evpp glog)
+
 set(EXECUTABLE_OUTPUT_PATH ./out) # cmake可执行文件的存放路径
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
