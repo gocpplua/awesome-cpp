@@ -28,6 +28,9 @@
 cd tests && mkdir -p build && cd build && cmake .. && make && ./out/test_demo --success
 ```
 
+## 参考资料:
+1. [现代 C++ 教程高速上手 C++ 11/14/17/20](https://changkun.de/modern-cpp/)
 
-
+2. [0voice/cpp_new_features](https://github.com/0voice/cpp_new_features)
+> 2021年最新整理， C++ 学习资料，含C++ 11 / 14 / 17 / 20 / 23 新特性、入门教程、推荐书籍、优质文章、学习笔记、教学视频等
 
