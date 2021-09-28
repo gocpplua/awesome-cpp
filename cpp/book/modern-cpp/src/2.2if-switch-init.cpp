@@ -21,3 +21,4 @@ int main() {
 }
 
 // g++ -o ./out/a 2.2if-switch-init.cpp  --std=c++17
+// g++/gcc 升级参考: https://segmentfault.com/a/1190000040739905
