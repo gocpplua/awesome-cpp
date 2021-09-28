@@ -43,6 +43,29 @@
     "thread": "cpp",
     "utility": "cpp",
     "typeinfo": "cpp",
-    "future": "cpp"
-  }
+    "future": "cpp",
+    "csetjmp": "cpp",
+    "csignal": "cpp",
+    "cstddef": "cpp",
+    "cstring": "cpp",
+    "strstream": "cpp",
+    "bitset": "cpp",
+    "cfenv": "cpp",
+    "codecvt": "cpp",
+    "complex": "cpp",
+    "forward_list": "cpp",
+    "list": "cpp",
+    "unordered_set": "cpp",
+    "any": "cpp",
+    "filesystem": "cpp",
+    "optional": "cpp",
+    "string_view": "cpp",
+    "iomanip": "cpp",
+    "scoped_allocator": "cpp",
+    "cinttypes": "cpp",
+    "regex": "cpp",
+    "typeindex": "cpp",
+    "valarray": "cpp"
+  },
+  "git.ignoreLimitWarning": true
 }
