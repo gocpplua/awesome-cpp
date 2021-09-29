@@ -34,7 +34,7 @@ int main() {
   
   
   int arr[5] = {1};
-  decltype(arr) auto_arr1[5] = {1}; // auto 不能用于推到数组类型
+  decltype(arr) auto_arr1[5] = {1};
   // auto auto_arr2[10] = {arr}; // auto 不能用于推到数组类型。 因为{arr}纯粹是一个句法结构。 它不是一个表达式，也没有类型。 因此， auto 不能从中推断出它的类型。
 
   return 0;
