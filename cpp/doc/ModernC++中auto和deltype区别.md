@@ -36,3 +36,4 @@ auto 的推导能力较弱，而且还有限制。
 1. [C++11新特性— auto 和 decltype 区别和联系](https://blog.csdn.net/y1196645376/article/details/51441503)
 2. [C++ auto和decltype的区别](http://c.biancheng.net/view/7158.html)
 3. [C++中关键字auto和decltype的区别](https://blog.csdn.net/yishizuofei/article/details/78942425)
+4. [C++11：decltype类型推导](https://hijk.tech/cpp/cpp11/decltype/)
