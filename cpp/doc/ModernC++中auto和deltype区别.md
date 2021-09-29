@@ -1,3 +1,5 @@
+本文是对auto和decltype的简述，更加详细的内容看文章后参考部分。
+
 # 一. auto和deltype作用
 C++11标准引入了auto和decltype类型说明符，它能让编译器帮我们去分析表达式所属的类型。
 
