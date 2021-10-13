@@ -46,6 +46,7 @@ void printf2(T0 t0, T... t) {
     if constexpr (sizeof...(t) > 0) printf2(t...);
 }
 
+// todo
 // 方法三：初始化列表展开 https://www.zhihu.com/question/443285720
 /*
 // 下面的写法会出现问题：error: parameter packs not expanded with ‘...’:
