@@ -46,7 +46,7 @@ void printf2(T0 t0, T... t) {
     if constexpr (sizeof...(t) > 0) printf2(t...);
 }
 
-// todo
+// TODO: 等待解决的问题
 // 方法三：初始化列表展开 https://www.zhihu.com/question/443285720
 /*
 // 下面的写法会出现问题：error: parameter packs not expanded with ‘...’:
@@ -58,6 +58,15 @@ auto printf3(T value, Ts... args) {
     }(), value)...};
 }
 //*/
+template<typename T, typename... Ts>
+auto printf3(T value, Ts... args){
+  std::cout << value << std::endl;
+  (void) std::initializer_list<T>{
+    ([&args]{
+
+    }, value)...
+  };
+}
 
 // 方法四：　折叠表达式　https://www.zhihu.com/question/443285720/answer/1719851060
 // 在元编程场景下初始化列表是能够保证模板可变参数包从左往右执行
