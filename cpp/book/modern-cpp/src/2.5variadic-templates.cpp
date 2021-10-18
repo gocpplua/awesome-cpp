@@ -1,4 +1,6 @@
-
+// clang++ -Wall -std=c++20 book/modern-cpp/src/2.5variadic-templates.cpp -o test
+// clang -v
+// Ubuntu clang version 13.0.0-++20210327080829+e5f2898bc751-1~exp1~20210327192522.3607
 #include <iostream>
 #include <vector>
 #include <map>
@@ -48,7 +50,7 @@ void printf2(T0 t0, T... t) {
 
 // TODO: 等待解决的问题
 // 方法三：初始化列表展开 https://www.zhihu.com/question/443285720
-/*
+///*
 // 下面的写法会出现问题：error: parameter packs not expanded with ‘...’:
 template<typename T, typename... Ts>
 auto printf3(T value, Ts... args) {
@@ -80,7 +82,7 @@ int main(){
 
   printf1(1,2,3,4);
   printf2(1,2,3,4);
-  //printf3(1, 2, 3, 4);
+  printf3(1, 2, 3, 4);
   printf4(1,2,3, 4);
   printf5(1,2,3, 4);
   return 0;
