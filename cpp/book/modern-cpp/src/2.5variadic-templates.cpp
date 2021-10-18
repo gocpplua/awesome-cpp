@@ -52,6 +52,7 @@ void printf2(T0 t0, T... t) {
 // 方法三：初始化列表展开 https://www.zhihu.com/question/443285720
 ///*
 // 下面的写法会出现问题：error: parameter packs not expanded with ‘...’:
+// 解决方案；　编译环境：本书将使用 clang++ 作为唯一使用的编译器，同时总是在代码中使用 -std=c++2a 编译标志。
 template<typename T, typename... Ts>
 auto printf3(T value, Ts... args) {
     std::cout << value << std::endl;
