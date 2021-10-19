@@ -65,7 +65,15 @@
     "cinttypes": "cpp",
     "regex": "cpp",
     "typeindex": "cpp",
-    "valarray": "cpp"
+    "valarray": "cpp",
+    "iterator": "cpp",
+    "map": "cpp",
+    "memory_resource": "cpp",
+    "random": "cpp",
+    "set": "cpp",
+    "source_location": "cpp",
+    "string": "cpp",
+    "variant": "cpp"
   },
   "git.ignoreLimitWarning": true
 }
