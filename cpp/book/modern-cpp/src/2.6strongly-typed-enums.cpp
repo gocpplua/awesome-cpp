@@ -13,11 +13,20 @@ enum class strongvaluetype {
   strongvalue2 = 2
 };
 
+#include <iostream>
+template<typename T>
+std::ostream& operator<<(
+    typename std::enable_if<std::is_enum<T>::value,
+        std::ostream>::type& stream, const T& e)
+{
+    return stream << static_cast<typename std::underlying_type<T>::type>(e);
+}
+
 int main(){
   if (strongvaluetype::strongvalue1 == strongvaluetype::strongvalue2 ){
     cout << "1" << endl;
   }
-
+  cout << strongvaluetype::strongvalue1 << endl;
   //  error: invalid operands to binary expression ('strongvaluetype' and 'int')
   /*
   if (strongvaluetype::strongvalue1 == 1 ){
