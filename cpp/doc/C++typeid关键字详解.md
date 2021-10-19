@@ -1,0 +1,1 @@
+[C++ typeid关键字详解](https://blog.csdn.net/gatieme/article/details/50947821)
