@@ -11,7 +11,7 @@ struct A {
     }
 };
 struct B {
-    std::shared_ptr<A> pointer;
+    std::weak_ptr<A> pointer;
     ~B() {
         std::cout << "B 被销毁" << std::endl;
     }
