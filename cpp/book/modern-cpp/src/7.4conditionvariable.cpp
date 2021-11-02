@@ -10,7 +10,7 @@ int main() {
     std::queue<int> produced_nums;
     std::mutex mtx;
     std::condition_variable cv;
-    bool notified = false;  // 通知信号
+    bool notified = false;  // 通知信号 尔值 notified 没有被 volatile 修饰，编译器可能对此变量存在优化，例如将其作为一个寄存器的值， 从而导致消费者线程永远无法观察到此值的变化。
 
     // 生产者
     auto producer = [&]() {
@@ -52,5 +52,6 @@ int main() {
     for (int i = 0; i < 2; ++i) {
         cs[i].join();
     }
+
     return 0;
 }
