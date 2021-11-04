@@ -1,3 +1,4 @@
+// clang++ book/C++-Concurrency-In-Action-Second-Edition/src/2.1.1启动线程.cpp -pthread
 #include <iostream>
 #include <thread>
 #include <chrono>
