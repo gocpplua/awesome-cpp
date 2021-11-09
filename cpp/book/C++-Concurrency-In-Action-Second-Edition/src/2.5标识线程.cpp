@@ -9,7 +9,7 @@ void some_core_part_of_algorithm()
   {
     std::cout << "main" << std::endl;
   }
-  std::cout << __FUNCTION__ << std::endl;
+  std::cout << __FUNCTION__ << " "<< std::this_thread::get_id() <<std::endl;
 }
 
 int main(){
