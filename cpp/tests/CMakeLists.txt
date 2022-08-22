@@ -21,9 +21,11 @@ target_link_libraries(main yaml-cpp)
 
 add_executable(test_demo test_demo.cpp)
 
-add_executable(test_cpp-httplib ./test_cpp-httplib/test_cpp-httplib.cpp)
-target_link_libraries(test_cpp-httplib pthread)
+add_executable(test_cpp_httplib ./test_cpp_httplib/test_cpp_httplib.cpp)
+target_link_libraries(test_cpp_httplib pthread)
 
+add_executable(test_cpp_httplib_game ./test_cpp_httplib/test_cpp_httplib_game.cpp)
+target_link_libraries(test_cpp_httplib_game pthread)
 
 add_executable(test_yaml ./test_yaml/test_yaml.cpp)
 target_link_libraries(test_yaml yaml-cpp)
