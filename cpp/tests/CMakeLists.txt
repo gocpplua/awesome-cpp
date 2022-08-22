@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.0.0) # CMake 最低版本
 project(UnitTest VERSION 0.1.0) # 设置工程名称 和版本
+set(CMAKE_CXX_STANDARD 11) 
 
 
 include(CTest)
@@ -19,6 +20,10 @@ add_executable(main main.cpp)
 target_link_libraries(main yaml-cpp)
 
 add_executable(test_demo test_demo.cpp)
+
+add_executable(test_cpp-httplib ./test_cpp-httplib/test_cpp-httplib.cpp)
+target_link_libraries(test_cpp-httplib pthread)
+
 
 add_executable(test_yaml ./test_yaml/test_yaml.cpp)
 target_link_libraries(test_yaml yaml-cpp)
