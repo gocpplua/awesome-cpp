@@ -93,9 +93,9 @@ namespace ns {
     std::string city;
   };
 
-  struct person {
-      std::string name;
-      int age;
+  struct customret {
+      int code;
+      std::string msg;
       addr data;
   };
 
@@ -108,16 +108,16 @@ namespace ns {
       j.at("city").get_to(p.city);
   }
 
-  void to_json(nlohmann::json& j, const person& p) {
-      j = nlohmann::json{ {"name", p.name}, {"age", p.age} };
+  void to_json(nlohmann::json& j, const customret& p) {
+      j = nlohmann::json{ {"msg", p.msg}, {"code", p.code} };
       nlohmann::json jaddr;
       to_json(jaddr, p.data);
       j["data"] = jaddr;
   }
 
-  void from_json(const nlohmann::json& j, person& p) {
-      j.at("name").get_to(p.name);
-      j.at("age").get_to(p.age);
+  void from_json(const nlohmann::json& j, customret& p) {
+      j.at("msg").get_to(p.msg);
+      j.at("code").get_to(p.code);
       j.at("data").get_to(p.data);
   }
 
@@ -143,21 +143,33 @@ int main(void) {
     res.set_content(j.dump(), "appliation/json");
   });
 
-  svr.Post("/api/largespacevr/v1/gameserver/startgame", [](const Request &req, Response &res) {
-    auto bodyJson = nlohmann::json::parse(req.body);
-    std::cout << "gameround:"<< bodyJson["gameround"] << std::endl;
-    ns::commonret p = {0, "success"};
-    nlohmann::json j = p;
-    res.set_content(j.dump(), "appliation/json");
-  });
-
   svr.Post("/api/largespacevr/v1/gameserver/stopgame", [](const Request &req, Response &res) {
     auto bodyJson = nlohmann::json::parse(req.body);
     std::cout << "gameround:"<< bodyJson["gameround"] << std::endl;
 
-    ns::person p {"chenqi", 30, "province", "city"};
+    ns::customret p {0, "success",  "province", "city"};
     nlohmann::json j = p;
     res.set_content(j.dump(), "appliation/json");
+  });
+
+  svr.Post("/api/largespacevr/v1/gameserver/control", [](const Request &req, Response &res) {
+    auto bodyJson = nlohmann::json::parse(req.body);
+    std::cout << "gameround:"<< bodyJson["gameround"] << std::endl;
+
+    // 方法一
+    auto jsonBody = nlohmann::json{
+      {"code", 1},
+      {"msg", "success"},
+      {"data", {{"s1",1}}}
+    };
+
+    /* 方法二
+    nlohmann::json jsonBody;
+    jsonBody["code"] = 1;
+    jsonBody["msg"] = "success";
+    jsonBody["data"] = {{"s1",1}};
+    */
+    res.set_content(jsonBody.dump(), "appliation/json");
   });
 
   svr.set_error_handler([](const Request & /*req*/, Response &res) {
